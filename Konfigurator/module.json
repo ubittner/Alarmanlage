@@ -1,0 +1,14 @@
+{
+    "id": "{E3ECD875-9AFF-F90B-45F8-A218572A0FAE}",
+    "name": "Alarmanlagenkonfigurator",
+    "type": 4,
+    "vendor": "UB",
+    "aliases": [
+        "Alarmanlagenkonfigurator"
+    ],
+    "url": "https://github.com/ubittner/Alarmanlage/tree/main/Konfigurator",
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "AAK"
+}

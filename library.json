@@ -1,0 +1,12 @@
+{
+    "id": "{CEDAB842-9168-AC25-2831-BA23E069A6A3}",
+    "name": "Alarmanlage",
+    "author": "Ulrich Bittner",
+    "url": "https://github.com/ubittner/Alarmanlage",
+    "compatibility": {
+        "version": "6.1"
+    },
+    "version": "7.0",
+    "build": 1,
+    "date": 1662617816
+}

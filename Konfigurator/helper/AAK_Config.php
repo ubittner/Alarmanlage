@@ -176,7 +176,18 @@ trait AAK_Config
                     'caption' => 'Benachrichtigung URL',
                     'width'   => '600px'
                 ],
-
+                [
+                    'type'    => 'ValidationTextBox',
+                    'name'    => 'DoorWindowStatusName',
+                    'caption' => 'Fensterstatus Modulname',
+                    'width'   => '600px'
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
+                    'name'    => 'DoorWindowStatusURL',
+                    'caption' => 'Fensterstatus URL',
+                    'width'   => '600px'
+                ],
                 [
                     'type'    => 'ValidationTextBox',
                     'name'    => 'RemoteControlName',
@@ -288,6 +299,11 @@ trait AAK_Config
                     'type'    => 'CheckBox',
                     'name'    => 'UseNotification',
                     'caption' => 'Benachrichtigung'
+                ],
+                [
+                    'type'    => 'CheckBox',
+                    'name'    => 'UseDoorWindowStatus',
+                    'caption' => 'Fensterstatus'
                 ],
                 [
                     'type'    => 'CheckBox',

@@ -23,24 +23,8 @@ class Alarmanlagenkonfigurator extends IPSModule
     //Constants
     private const MODULE_NAME = 'Alarmanlagenkonfigurator';
     private const MODULE_PREFIX = 'AAK';
-    private const MODULE_VERSION = '7.0-2, 26.01.2023';
+    private const MODULE_VERSION = '7.0-3, 28.01.2023';
     private const MODULE_CONTROL_GUID = '{B8A5067A-AFC2-3798-FEDC-BCD02A45615E}';
-
-    private const COMMAND_CONTROL_MODULE_GUID = '{0559B287-1052-A73E-B834-EBD9B62CB938}';
-    private const ALARM_CALL_MODULE_GUID = '';
-    private const ALARM_LIGHT_MODULE_GUID = '';
-    private const ALERTING_MODULE_GUID = '';
-    private const ALARM_PROTOCOL_MODULE_GUID = '';
-    private const ALARM_SIREN_MODULE_GUID = '';
-    private const ALARM_ZONE_MODULE_GUID = '';
-    private const BATTERY_DETECTOR_MODULE_GUID = '';
-    private const NOTIFICATION_MODULE_GUID = '';
-    private const REMOTE_CONTROL_MODULE_GUID = '';
-    private const MAILER_MODULE_GUID = '';
-    private const STATUS_DISPLAY_MODULE_GUID = '';
-    private const MAINTENANCE_MODE_MODULE_GUID = '';
-    private const CENTRAL_STATUS_MODULE_GUID = '';
-    private const DOOR_WINDOW_STATUS_MODULE_GUID = '';
 
     public function Create()
     {
@@ -51,40 +35,6 @@ class Alarmanlagenkonfigurator extends IPSModule
 
         //Functions
         $this->RegisterPropertyString('Note', '');
-
-        //Modules
-        $this->RegisterPropertyBoolean('UseCommandControl', true);
-        $this->RegisterPropertyBoolean('UseAlarmCall', true);
-        $this->RegisterPropertyBoolean('UseAlarmLight', true);
-        $this->RegisterPropertyBoolean('UseAlerting', true);
-        $this->RegisterPropertyBoolean('UseAlarmProtocol', true);
-        $this->RegisterPropertyBoolean('UseAlarmSiren', true);
-        $this->RegisterPropertyBoolean('UseAlarmZone', true);
-        $this->RegisterPropertyBoolean('UseBatteryDetector', true);
-        $this->RegisterPropertyBoolean('UseNotification', true);
-        $this->RegisterPropertyBoolean('UseDoorWindowStatus', true);
-        $this->RegisterPropertyBoolean('UseRemoteControl', true);
-        $this->RegisterPropertyBoolean('UseMailer', true);
-        $this->RegisterPropertyBoolean('UseStatusDisplay', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceMode', true);
-        $this->RegisterPropertyBoolean('UseCentralStatus', true);
-
-        //Instances
-        $this->RegisterPropertyBoolean('UseCommandControlInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmCallInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmLightInstance', true);
-        $this->RegisterPropertyBoolean('UseAlertingInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmProtocolInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmSirenInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmZoneInstance', true);
-        $this->RegisterPropertyBoolean('UseBatteryDetectorInstance', true);
-        $this->RegisterPropertyBoolean('UseNotificationInstance', true);
-        $this->RegisterPropertyBoolean('UseDoorWindowStatusInstance', true);
-        $this->RegisterPropertyBoolean('UseRemoteControlInstance', true);
-        $this->RegisterPropertyBoolean('UseMailerInstance', true);
-        $this->RegisterPropertyBoolean('UseStatusDisplayInstance', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceModeInstance', true);
-        $this->RegisterPropertyBoolean('UseCentralStatusInstance', true);
 
         //Repositories
         $this->RegisterPropertyString('CommandControlName', 'Ablaufsteuerung');
@@ -115,8 +65,46 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyString('StatusDisplayURL', 'https://github.com/ubittner/Statusanzeige');
         $this->RegisterPropertyString('MaintenanceModeName', 'Wartungsmodus');
         $this->RegisterPropertyString('MaintenanceURL', 'https://github.com/ubittner/Wartungsmodus');
+        $this->RegisterPropertyString('WarningIndicatorName', 'Warnmelder');
+        $this->RegisterPropertyString('WarningIndicatorURL', 'https://github.com/ubittner/Warnmelder');
         $this->RegisterPropertyString('CentralStatusName', 'Zentralenstatus');
         $this->RegisterPropertyString('CentralStatusURL', 'https://github.com/ubittner/Zentralenstatus');
+
+        //Modules
+        $this->RegisterPropertyBoolean('UseCommandControl', true);
+        $this->RegisterPropertyBoolean('UseAlarmCall', true);
+        $this->RegisterPropertyBoolean('UseAlarmLight', true);
+        $this->RegisterPropertyBoolean('UseAlerting', true);
+        $this->RegisterPropertyBoolean('UseAlarmProtocol', true);
+        $this->RegisterPropertyBoolean('UseAlarmSiren', true);
+        $this->RegisterPropertyBoolean('UseAlarmZone', true);
+        $this->RegisterPropertyBoolean('UseBatteryDetector', true);
+        $this->RegisterPropertyBoolean('UseNotification', true);
+        $this->RegisterPropertyBoolean('UseDoorWindowStatus', true);
+        $this->RegisterPropertyBoolean('UseRemoteControl', true);
+        $this->RegisterPropertyBoolean('UseMailer', true);
+        $this->RegisterPropertyBoolean('UseStatusDisplay', true);
+        $this->RegisterPropertyBoolean('UseMaintenanceMode', true);
+        $this->RegisterPropertyBoolean('UseWarningIndicator', true);
+        $this->RegisterPropertyBoolean('UseCentralStatus', true);
+
+        //Instances (unused at the moment)
+        $this->RegisterPropertyBoolean('UseCommandControlInstance', true);
+        $this->RegisterPropertyBoolean('UseAlarmCallInstance', true);
+        $this->RegisterPropertyBoolean('UseAlarmLightInstance', true);
+        $this->RegisterPropertyBoolean('UseAlertingInstance', true);
+        $this->RegisterPropertyBoolean('UseAlarmProtocolInstance', true);
+        $this->RegisterPropertyBoolean('UseAlarmSirenInstance', true);
+        $this->RegisterPropertyBoolean('UseAlarmZoneInstance', true);
+        $this->RegisterPropertyBoolean('UseBatteryDetectorInstance', true);
+        $this->RegisterPropertyBoolean('UseNotificationInstance', true);
+        $this->RegisterPropertyBoolean('UseDoorWindowStatusInstance', true);
+        $this->RegisterPropertyBoolean('UseRemoteControlInstance', true);
+        $this->RegisterPropertyBoolean('UseMailerInstance', true);
+        $this->RegisterPropertyBoolean('UseStatusDisplayInstance', true);
+        $this->RegisterPropertyBoolean('UseMaintenanceModeInstance', true);
+        $this->RegisterPropertyBoolean('UseWarningIndicatorInstance', true);
+        $this->RegisterPropertyBoolean('UseCentralStatusInstance', true);
     }
 
     public function ApplyChanges()

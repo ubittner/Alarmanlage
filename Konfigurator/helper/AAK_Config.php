@@ -64,6 +64,8 @@ trait AAK_Config
             ]
         ];
 
+        ##### Repositories
+
         $form['elements'][] = [
             'type'    => 'ExpansionPanel',
             'caption' => 'Repositories',
@@ -238,6 +240,18 @@ trait AAK_Config
                 ],
                 [
                     'type'    => 'ValidationTextBox',
+                    'name'    => 'WarningIndicatorName',
+                    'caption' => 'Warnmelder Modulname',
+                    'width'   => '600px'
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
+                    'name'    => 'WarningIndicatorURL',
+                    'caption' => 'Warnmelder URL',
+                    'width'   => '600px'
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
                     'name'    => 'CentralStatusName',
                     'caption' => 'Zentralenstatus Modulname',
                     'width'   => '600px'
@@ -250,6 +264,8 @@ trait AAK_Config
                 ]
             ]
         ];
+
+        ##### Modules
 
         $form['elements'][] = [
             'type'    => 'ExpansionPanel',
@@ -324,6 +340,11 @@ trait AAK_Config
                     'type'    => 'CheckBox',
                     'name'    => 'UseMaintenanceMode',
                     'caption' => 'Wartungsmodus'
+                ],
+                [
+                    'type'    => 'CheckBox',
+                    'name'    => 'UseWarningIndicator',
+                    'caption' => 'Warnmelder'
                 ],
                 [
                     'type'    => 'CheckBox',

@@ -23,7 +23,7 @@ class Alarmanlagenkonfigurator extends IPSModule
     //Constants
     private const MODULE_NAME = 'Alarmanlagenkonfigurator';
     private const MODULE_PREFIX = 'AAK';
-    private const MODULE_VERSION = '7.0-3, 28.01.2023';
+    private const MODULE_VERSION = '7.0-4, 30.01.2023';
     private const MODULE_CONTROL_GUID = '{B8A5067A-AFC2-3798-FEDC-BCD02A45615E}';
 
     public function Create()
@@ -63,10 +63,10 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyString('MailerURL', 'https://github.com/ubittner/Mailer');
         $this->RegisterPropertyString('StatusDisplayName', 'Statusanzeige');
         $this->RegisterPropertyString('StatusDisplayURL', 'https://github.com/ubittner/Statusanzeige');
-        $this->RegisterPropertyString('MaintenanceModeName', 'Wartungsmodus');
-        $this->RegisterPropertyString('MaintenanceURL', 'https://github.com/ubittner/Wartungsmodus');
         $this->RegisterPropertyString('WarningIndicatorName', 'Warnmelder');
         $this->RegisterPropertyString('WarningIndicatorURL', 'https://github.com/ubittner/Warnmelder');
+        $this->RegisterPropertyString('MaintenanceModeName', 'Wartungsmodus');
+        $this->RegisterPropertyString('MaintenanceURL', 'https://github.com/ubittner/Wartungsmodus');
         $this->RegisterPropertyString('CentralStatusName', 'Zentralenstatus');
         $this->RegisterPropertyString('CentralStatusURL', 'https://github.com/ubittner/Zentralenstatus');
 
@@ -84,8 +84,8 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyBoolean('UseRemoteControl', true);
         $this->RegisterPropertyBoolean('UseMailer', true);
         $this->RegisterPropertyBoolean('UseStatusDisplay', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceMode', true);
         $this->RegisterPropertyBoolean('UseWarningIndicator', true);
+        $this->RegisterPropertyBoolean('UseMaintenanceMode', true);
         $this->RegisterPropertyBoolean('UseCentralStatus', true);
 
         //Instances (unused at the moment)
@@ -102,8 +102,8 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyBoolean('UseRemoteControlInstance', true);
         $this->RegisterPropertyBoolean('UseMailerInstance', true);
         $this->RegisterPropertyBoolean('UseStatusDisplayInstance', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceModeInstance', true);
         $this->RegisterPropertyBoolean('UseWarningIndicatorInstance', true);
+        $this->RegisterPropertyBoolean('UseMaintenanceModeInstance', true);
         $this->RegisterPropertyBoolean('UseCentralStatusInstance', true);
     }
 
@@ -150,6 +150,7 @@ class Alarmanlagenkonfigurator extends IPSModule
             $properties[] = ['useModule' => 'UseRemoteControl', 'moduleName' => 'RemoteControlName', 'moduleURL' => 'RemoteControlURL'];
             $properties[] = ['useModule' => 'UseMailer', 'moduleName' => 'MailerName', 'moduleURL' => 'MailerURL'];
             $properties[] = ['useModule' => 'UseStatusDisplay', 'moduleName' => 'StatusDisplayName', 'moduleURL' => 'StatusDisplayURL'];
+            $properties[] = ['useModule' => 'UseWarningIndicator', 'moduleName' => 'WarningIndicatorName', 'moduleURL' => 'WarningIndicatorURL'];
             $properties[] = ['useModule' => 'UseMaintenanceMode', 'moduleName' => 'MaintenanceModeName', 'moduleURL' => 'MaintenanceURL'];
             $properties[] = ['useModule' => 'UseCentralStatus', 'moduleName' => 'CentralStatusName', 'moduleURL' => 'CentralStatusURL'];
             foreach ($properties as $property) {

@@ -338,13 +338,13 @@ trait AAK_Config
                 ],
                 [
                     'type'    => 'CheckBox',
-                    'name'    => 'UseMaintenanceMode',
-                    'caption' => 'Wartungsmodus'
+                    'name'    => 'UseWarningIndicator',
+                    'caption' => 'Warnmelder'
                 ],
                 [
                     'type'    => 'CheckBox',
-                    'name'    => 'UseWarningIndicator',
-                    'caption' => 'Warnmelder'
+                    'name'    => 'UseMaintenanceMode',
+                    'caption' => 'Wartungsmodus'
                 ],
                 [
                     'type'    => 'CheckBox',

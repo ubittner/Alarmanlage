@@ -10,7 +10,9 @@
 
 /** @noinspection PhpExpressionResultUnusedInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUndefinedFunctionInspection */
 /** @noinspection PhpUnused */
+
 declare(strict_types=1);
 
 include_once __DIR__ . '/helper/AAK_autoload.php';
@@ -23,7 +25,7 @@ class Alarmanlagenkonfigurator extends IPSModule
     //Constants
     private const MODULE_NAME = 'Alarmanlagenkonfigurator';
     private const MODULE_PREFIX = 'AAK';
-    private const MODULE_VERSION = '7.0-4, 30.01.2023';
+    private const MODULE_VERSION = '7.0-5, 26.03.2023';
     private const MODULE_CONTROL_GUID = '{B8A5067A-AFC2-3798-FEDC-BCD02A45615E}';
 
     public function Create()
@@ -55,6 +57,8 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyString('BatteryDetectorURL', 'https://github.com/ubittner/Batteriemelder');
         $this->RegisterPropertyString('NotificationName', 'Benachrichtigung');
         $this->RegisterPropertyString('NotificationURL', 'https://github.com/ubittner/Benachrichtigung');
+        $this->RegisterPropertyString('MotionDetectorStatusName', 'Bewegungsmelderstatus');
+        $this->RegisterPropertyString('MotionDetectorStatusURL', 'https://github.com/ubittner/Bewegungsmelderstatus');
         $this->RegisterPropertyString('DoorWindowStatusName', 'Fensterstatus');
         $this->RegisterPropertyString('DoorWindowStatusURL', 'https://github.com/ubittner/Fensterstatus');
         $this->RegisterPropertyString('RemoteControlName', 'Fernbedienung');
@@ -80,6 +84,7 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyBoolean('UseAlarmZone', true);
         $this->RegisterPropertyBoolean('UseBatteryDetector', true);
         $this->RegisterPropertyBoolean('UseNotification', true);
+        $this->RegisterPropertyBoolean('UseMotionDetectorStatus', true);
         $this->RegisterPropertyBoolean('UseDoorWindowStatus', true);
         $this->RegisterPropertyBoolean('UseRemoteControl', true);
         $this->RegisterPropertyBoolean('UseMailer', true);
@@ -98,6 +103,7 @@ class Alarmanlagenkonfigurator extends IPSModule
         $this->RegisterPropertyBoolean('UseAlarmZoneInstance', true);
         $this->RegisterPropertyBoolean('UseBatteryDetectorInstance', true);
         $this->RegisterPropertyBoolean('UseNotificationInstance', true);
+        $this->RegisterPropertyBoolean('UseMotionDetectorStatusInstance', true);
         $this->RegisterPropertyBoolean('UseDoorWindowStatusInstance', true);
         $this->RegisterPropertyBoolean('UseRemoteControlInstance', true);
         $this->RegisterPropertyBoolean('UseMailerInstance', true);
@@ -146,6 +152,7 @@ class Alarmanlagenkonfigurator extends IPSModule
             $properties[] = ['useModule' => 'UseAlarmZone', 'moduleName' => 'AlarmZoneName', 'moduleURL' => 'AlarmZoneURL'];
             $properties[] = ['useModule' => 'UseBatteryDetector', 'moduleName' => 'BatteryDetectorName', 'moduleURL' => 'BatteryDetectorURL'];
             $properties[] = ['useModule' => 'UseNotification', 'moduleName' => 'NotificationName', 'moduleURL' => 'NotificationURL'];
+            $properties[] = ['useModule' => 'UseMotionDetectorStatus', 'moduleName' => 'MotionDetectorStatusName', 'moduleURL' => 'MotionDetectorStatusURL'];
             $properties[] = ['useModule' => 'UseDoorWindowStatus', 'moduleName' => 'DoorWindowStatusName', 'moduleURL' => 'DoorWindowStatusURL'];
             $properties[] = ['useModule' => 'UseRemoteControl', 'moduleName' => 'RemoteControlName', 'moduleURL' => 'RemoteControlURL'];
             $properties[] = ['useModule' => 'UseMailer', 'moduleName' => 'MailerName', 'moduleURL' => 'MailerURL'];

@@ -180,6 +180,18 @@ trait AAK_Config
                 ],
                 [
                     'type'    => 'ValidationTextBox',
+                    'name'    => 'MotionDetectorStatusName',
+                    'caption' => 'Bewegungsmelderstatus Modulname',
+                    'width'   => '600px'
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
+                    'name'    => 'MotionDetectorStatusURL',
+                    'caption' => 'Bewegungsmelderstatus URL',
+                    'width'   => '600px'
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
                     'name'    => 'DoorWindowStatusName',
                     'caption' => 'Fensterstatus Modulname',
                     'width'   => '600px'
@@ -315,6 +327,11 @@ trait AAK_Config
                     'type'    => 'CheckBox',
                     'name'    => 'UseNotification',
                     'caption' => 'Benachrichtigung'
+                ],
+                [
+                    'type'    => 'CheckBox',
+                    'name'    => 'UseMotionDetectorStatus',
+                    'caption' => 'Bewegungsmelderstatus'
                 ],
                 [
                     'type'    => 'CheckBox',

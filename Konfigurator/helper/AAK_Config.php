@@ -15,493 +15,13 @@ declare(strict_types=1);
 trait AAK_Config
 {
     /**
-     * Gets the configuration form.
+     * Reloads the configuration form.
      *
-     * @return false|string
-     * @throws Exception
+     * @return void
      */
-    public function GetConfigurationForm()
+    public function ReloadConfig(): void
     {
-        $form = [];
-
-        ########## Elements
-
-        //Info
-        $form['elements'][0] = [
-            'type'    => 'ExpansionPanel',
-            'caption' => 'Info',
-            'items'   => [
-                [
-                    'type'    => 'Label',
-                    'name'    => 'ModuleID',
-                    'caption' => "ID:\t\t\t" . $this->InstanceID
-                ],
-                [
-                    'type'    => 'Label',
-                    'name'    => 'ModuleDesignation',
-                    'caption' => "Modul:\t\t" . self::MODULE_NAME
-                ],
-                [
-                    'type'    => 'Label',
-                    'name'    => 'ModulePrefix',
-                    'caption' => "Präfix:\t\t" . self::MODULE_PREFIX
-                ],
-                [
-                    'type'    => 'Label',
-                    'name'    => 'ModuleVersion',
-                    'caption' => "Version:\t\t" . self::MODULE_VERSION
-                ],
-                [
-                    'type'    => 'Label',
-                    'caption' => ' '
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'Note',
-                    'caption' => 'Notiz',
-                    'width'   => '600px'
-                ]
-            ]
-        ];
-
-        ##### Repositories
-
-        $form['elements'][] = [
-            'type'    => 'ExpansionPanel',
-            'caption' => 'Repositories',
-            'items'   => [
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'CommandControlName',
-                    'caption' => 'Ablaufsteuerung Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'CommandControlURL',
-                    'caption' => 'Ablaufsteuerung URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmCallName',
-                    'caption' => 'Alarmanruf Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmCallURL',
-                    'caption' => 'Alarmanruf URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmLightName',
-                    'caption' => 'Alarmbeleuchtung Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmLightURL',
-                    'caption' => 'Alarmbeleuchtung URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlertingName',
-                    'caption' => 'Alarmierung Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlertingURL',
-                    'caption' => 'Alarmierung URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmProtocolName',
-                    'caption' => 'Alarmprotokoll Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmProtocolURL',
-                    'caption' => 'Alarmprotokoll URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmSirenName',
-                    'caption' => 'Alarmsirene Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmSirenURL',
-                    'caption' => 'Alarmsirene URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmZoneName',
-                    'caption' => 'Alarmzone Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'AlarmZoneURL',
-                    'caption' => 'Alarmzone URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'BatteryDetectorName',
-                    'caption' => 'Batteriemelder Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'BatteryDetectorURL',
-                    'caption' => 'Batteriemelder URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'NotificationName',
-                    'caption' => 'Benachrichtigung Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'NotificationURL',
-                    'caption' => 'Benachrichtigung URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MotionDetectorStatusName',
-                    'caption' => 'Bewegungsmelderstatus Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MotionDetectorStatusURL',
-                    'caption' => 'Bewegungsmelderstatus URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'DoorWindowStatusName',
-                    'caption' => 'Fensterstatus Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'DoorWindowStatusURL',
-                    'caption' => 'Fensterstatus URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'RemoteControlName',
-                    'caption' => 'Fernbedienung Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'RemoteControlURL',
-                    'caption' => 'Fernbedienung URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MailerName',
-                    'caption' => 'Mailer Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MailerURL',
-                    'caption' => 'Mailer URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'StatusDisplayName',
-                    'caption' => 'Statusanzeige Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'StatusDisplayURL',
-                    'caption' => 'Statusanzeige URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MaintenanceModeName',
-                    'caption' => 'Wartungsmodus Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'MaintenanceURL',
-                    'caption' => 'Wartungsmodus URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'WarningIndicatorName',
-                    'caption' => 'Warnmelder Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'WarningIndicatorURL',
-                    'caption' => 'Warnmelder URL',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'CentralStatusName',
-                    'caption' => 'Zentralenstatus Modulname',
-                    'width'   => '600px'
-                ],
-                [
-                    'type'    => 'ValidationTextBox',
-                    'name'    => 'CentralStatusURL',
-                    'caption' => 'Zentralenstatus URL',
-                    'width'   => '600px'
-                ]
-            ]
-        ];
-
-        ##### Modules
-
-        $form['elements'][] = [
-            'type'    => 'ExpansionPanel',
-            'caption' => 'Module',
-            'items'   => [
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseCommandControl',
-                    'caption' => 'Ablaufsteuerung'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlarmCall',
-                    'caption' => 'Alarmanruf'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlarmLight',
-                    'caption' => 'Alarmbeleuchtung'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlerting',
-                    'caption' => 'Alarmierung'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlarmProtocol',
-                    'caption' => 'Alarmprotokoll'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlarmSiren',
-                    'caption' => 'Alarmsirene'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseAlarmZone',
-                    'caption' => 'Alarmzone'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseBatteryDetector',
-                    'caption' => 'Batteriemelder'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseNotification',
-                    'caption' => 'Benachrichtigung'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseMotionDetectorStatus',
-                    'caption' => 'Bewegungsmelderstatus'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseDoorWindowStatus',
-                    'caption' => 'Fensterstatus'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseRemoteControl',
-                    'caption' => 'Fernbedienung'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseMailer',
-                    'caption' => 'Mailer'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseStatusDisplay',
-                    'caption' => 'Statusanzeige'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseWarningIndicator',
-                    'caption' => 'Warnmelder'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseMaintenanceMode',
-                    'caption' => 'Wartungsmodus'
-                ],
-                [
-                    'type'    => 'CheckBox',
-                    'name'    => 'UseCentralStatus',
-                    'caption' => 'Zentralenstatus'
-                ],
-                [
-                    'type'    => 'Label',
-                    'caption' => ' '
-                ],
-                [
-                    'type'    => 'Button',
-                    'caption' => 'Hinzufügen',
-                    'onClick' => self::MODULE_PREFIX . '_AddModules($id);',
-                    'visible' => true
-                ]
-            ]
-        ];
-
-        ########## Actions
-
-        $form['actions'][] = [
-            'type'    => 'ExpansionPanel',
-            'caption' => 'Konfiguration',
-            'items'   => [
-                [
-                    'type'    => 'Button',
-                    'caption' => 'Neu laden',
-                    'onClick' => self::MODULE_PREFIX . '_ReloadConfig($id);'
-                ]
-            ]
-        ];
-
-        //Registered messages
-        $registeredMessages = [];
-        $messages = $this->GetMessageList();
-        foreach ($messages as $id => $messageID) {
-            $name = 'Objekt #' . $id . ' existiert nicht';
-            $rowColor = '#FFC0C0'; //red
-            if (@IPS_ObjectExists($id)) {
-                $name = IPS_GetName($id);
-                $rowColor = '#C0FFC0'; //light green
-            }
-            switch ($messageID) {
-                case [10001]:
-                    $messageDescription = 'IPS_KERNELSTARTED';
-                    break;
-
-                case [10603]:
-                    $messageDescription = 'VM_UPDATE';
-                    break;
-
-                default:
-                    $messageDescription = 'keine Bezeichnung';
-            }
-            $registeredMessages[] = [
-                'ObjectID'           => $id,
-                'Name'               => $name,
-                'MessageID'          => $messageID,
-                'MessageDescription' => $messageDescription,
-                'rowColor'           => $rowColor];
-        }
-
-        $form['actions'][] = [
-            'type'    => 'ExpansionPanel',
-            'caption' => 'Registrierte Nachrichten',
-            'items'   => [
-                [
-                    'type'     => 'List',
-                    'name'     => 'RegisteredMessages',
-                    'rowCount' => 10,
-                    'sort'     => [
-                        'column'    => 'ObjectID',
-                        'direction' => 'ascending'
-                    ],
-                    'columns' => [
-                        [
-                            'caption' => 'ID',
-                            'name'    => 'ObjectID',
-                            'width'   => '150px',
-                            'onClick' => self::MODULE_PREFIX . '_ModifyButton($id, "RegisteredMessagesConfigurationButton", "ID " . $RegisteredMessages["ObjectID"] . " aufrufen", $RegisteredMessages["ObjectID"]);'
-                        ],
-                        [
-                            'caption' => 'Name',
-                            'name'    => 'Name',
-                            'width'   => '300px',
-                            'onClick' => self::MODULE_PREFIX . '_ModifyButton($id, "RegisteredMessagesConfigurationButton", "ID " . $RegisteredMessages["ObjectID"] . " aufrufen", $RegisteredMessages["ObjectID"]);'
-                        ],
-                        [
-                            'caption' => 'Nachrichten ID',
-                            'name'    => 'MessageID',
-                            'width'   => '150px'
-                        ],
-                        [
-                            'caption' => 'Nachrichten Bezeichnung',
-                            'name'    => 'MessageDescription',
-                            'width'   => '250px'
-                        ]
-                    ],
-                    'values' => $registeredMessages
-                ],
-                [
-                    'type'     => 'OpenObjectButton',
-                    'name'     => 'RegisteredMessagesConfigurationButton',
-                    'caption'  => 'Aufrufen',
-                    'visible'  => false,
-                    'objectID' => 0
-                ]
-            ]
-        ];
-
-        ########## Status
-
-        $form['status'][] = [
-            'code'    => 101,
-            'icon'    => 'active',
-            'caption' => self::MODULE_NAME . ' wird erstellt',
-        ];
-        $form['status'][] = [
-            'code'    => 102,
-            'icon'    => 'active',
-            'caption' => self::MODULE_NAME . ' ist aktiv',
-        ];
-        $form['status'][] = [
-            'code'    => 103,
-            'icon'    => 'active',
-            'caption' => self::MODULE_NAME . ' wird gelöscht',
-        ];
-        $form['status'][] = [
-            'code'    => 104,
-            'icon'    => 'inactive',
-            'caption' => self::MODULE_NAME . ' ist inaktiv',
-        ];
-        $form['status'][] = [
-            'code'    => 200,
-            'icon'    => 'inactive',
-            'caption' => 'Es ist Fehler aufgetreten, weitere Informationen unter Meldungen, im Log oder Debug!',
-        ];
-
-        return json_encode($form);
+        $this->ReloadForm();
     }
 
     /**
@@ -524,12 +44,1832 @@ trait AAK_Config
     }
 
     /**
-     * Reloads the configuration form.
+     * Expands or collapses the expansion panels.
+     *
+     * @param bool $State
+     * false =  collapse,
+     * true =   expand
      *
      * @return void
      */
-    public function ReloadConfig(): void
+    public function ExpandExpansionPanels(bool $State): void
     {
-        $this->ReloadForm();
+        for ($i = 1; $i <= 10; $i++) {
+            $this->UpdateFormField('Panel' . $i, 'expanded', $State);
+        }
+    }
+
+    public function ShowLibraries(int $Library): void
+    {
+        if ($Library == 0) {
+            for ($i = 1; $i <= 17; $i++) {
+                $this->UpdateFormField('Label' . $i, 'visible', false);
+                $this->UpdateFormField('Row' . $i, 'visible', false);
+            }
+        }
+
+        if ($Library > 0 && $Library < 100) {
+            for ($i = 1; $i <= 17; $i++) {
+                if ($i == $Library) {
+                    $visible = true;
+                } else {
+                    $visible = false;
+                }
+                $this->UpdateFormField('Label' . $i, 'visible', $visible);
+                $this->UpdateFormField('Row' . $i, 'visible', $visible);
+            }
+        }
+
+        if ($Library == 100) {
+            for ($i = 1; $i <= 17; $i++) {
+                $this->UpdateFormField('Label' . $i, 'visible', true);
+                $this->UpdateFormField('Row' . $i, 'visible', true);
+            }
+        }
+    }
+
+    /**
+     * Gets the configuration form.
+     *
+     * @return false|string
+     * @throws Exception
+     */
+    public function GetConfigurationForm()
+    {
+        $form = [];
+
+        ########## Elements
+
+        //Configuration buttons
+        $form['elements'][0] =
+            [
+                'type'  => 'RowLayout',
+                'items' => [
+                    [
+                        'type'    => 'Button',
+                        'caption' => 'Konfiguration ausklappen',
+                        'onClick' => self::MODULE_PREFIX . '_ExpandExpansionPanels($id, true);'
+                    ],
+                    [
+                        'type'    => 'Button',
+                        'caption' => 'Konfiguration einklappen',
+                        'onClick' => self::MODULE_PREFIX . '_ExpandExpansionPanels($id, false);'
+                    ],
+                    [
+                        'type'    => 'Button',
+                        'caption' => 'Konfiguration neu laden',
+                        'onClick' => self::MODULE_PREFIX . '_ReloadConfig($id);'
+                    ]
+                ]
+            ];
+
+        //Info
+        $library = IPS_GetLibrary(self::LIBRARY_GUID);
+        $module = IPS_GetModule(self::MODULE_GUID);
+        $form['elements'][] = [
+            'type'    => 'ExpansionPanel',
+            'name'    => 'Panel1',
+            'caption' => 'Info',
+            'items'   => [
+                [
+                    'type'    => 'Label',
+                    'name'    => 'ModuleID',
+                    'caption' => "ID:\t\t\t" . $this->InstanceID
+                ],
+                [
+                    'type'    => 'Label',
+                    'caption' => "Modul:\t\t" . $module['ModuleName']
+                ],
+                [
+                    'type'    => 'Label',
+                    'caption' => "Präfix:\t\t" . $module['Prefix']
+                ],
+                [
+                    'type'    => 'Label',
+                    'caption' => "Version:\t\t" . $library['Version'] . '-' . $library['Build'] . ', ' . date('d.m.Y', $library['Date'])
+                ],
+                [
+                    'type'    => 'Label',
+                    'caption' => "Entwickler:\t" . $library['Author']
+                ],
+                [
+                    'type'    => 'Label',
+                    'caption' => ' '
+                ],
+                [
+                    'type'    => 'ValidationTextBox',
+                    'name'    => 'Note',
+                    'caption' => 'Notiz',
+                    'width'   => '600px'
+                ]
+            ]
+        ];
+
+        ##### Repositories
+
+        $form['elements'][] = [
+            'type'    => 'ExpansionPanel',
+            'name'    => 'Panel2',
+            'caption' => 'Repositories',
+            'items'   => [
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'CommandControlURL',
+                            'caption' => 'Ablaufsteuerung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlarmCallURL',
+                            'caption' => 'Alarmanruf URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlarmLightURL',
+                            'caption' => 'Alarmbeleuchtung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlertingURL',
+                            'caption' => 'Alarmierung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlarmProtocolURL',
+                            'caption' => 'Alarmprotokoll URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlarmSirenURL',
+                            'caption' => 'Alarmsirene URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'AlarmZoneURL',
+                            'caption' => 'Alarmzone URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'BatteryDetectorURL',
+                            'caption' => 'Batteriemelder URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'NotificationURL',
+                            'caption' => 'Benachrichtigung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'MotionDetectorStatusURL',
+                            'caption' => 'Bewegungsmelderstatus URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'DoorWindowStatusURL',
+                            'caption' => 'Fensterstatus URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'RemoteControlURL',
+                            'caption' => 'Fernbedienung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'MailerURL',
+                            'caption' => 'Mailer URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'StatusDisplayURL',
+                            'caption' => 'Statusanzeige URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'MaintenanceModeURL',
+                            'caption' => 'Wartungsmodus URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'WarningIndicatorURL',
+                            'caption' => 'Warnmelder URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'CentralStatusURL',
+                            'caption' => 'Zentralenstatus URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        ########## Actions
+
+        $form['actions'][] =
+            [
+                'type'    => 'SelectCategory',
+                'name'    => 'CategoryID',
+                'caption' => 'Installationsordner',
+                'width'   => '600px',
+                'value'   => 0
+            ];
+
+        $form['actions'][] =
+            [
+                'type'    => 'Select',
+                'name'    => 'SelectLibrary',
+                'caption' => 'Bibliothek',
+                'options' => [
+                    [
+                        'caption' => 'Bitte auswählen',
+                        'value'   => 0
+                    ],
+                    [
+                        'caption' => 'Alle anzeigen',
+                        'value'   => 100
+                    ],
+                    [
+                        'caption' => 'Ablaufsteuerung',
+                        'value'   => 1
+                    ],
+                    [
+                        'caption' => 'Alarmanruf',
+                        'value'   => 2
+                    ],
+                    [
+                        'caption' => 'Alarmbeleuchtung',
+                        'value'   => 3
+                    ],
+                    [
+                        'caption' => 'Alarmierung',
+                        'value'   => 4
+                    ],
+                    [
+                        'caption' => 'Alarmprotokoll',
+                        'value'   => 5
+                    ],
+                    [
+                        'caption' => 'Alarmsirene',
+                        'value'   => 6
+                    ],
+                    [
+                        'caption' => 'Alarmzone',
+                        'value'   => 7
+                    ],
+                    [
+                        'caption' => 'Batteriemelder',
+                        'value'   => 8
+                    ],
+                    [
+                        'caption' => 'Benachrichtigung',
+                        'value'   => 9
+                    ],
+                    [
+                        'caption' => 'Bewegungsmelderstatus',
+                        'value'   => 10
+                    ],
+                    [
+                        'caption' => 'Fensterstatus',
+                        'value'   => 11
+                    ],
+                    [
+                        'caption' => 'Fernbedienung',
+                        'value'   => 12
+                    ],
+                    [
+                        'caption' => 'Mailer',
+                        'value'   => 13
+                    ],
+                    [
+                        'caption' => 'Statusanzeige',
+                        'value'   => 14
+                    ],
+                    [
+                        'caption' => 'Wartungsmodus',
+                        'value'   => 15
+                    ],
+                    [
+                        'caption' => 'Warnmelder',
+                        'value'   => 16
+                    ],
+                    [
+                        'caption' => 'Zentralenstatus',
+                        'value'   => 17
+                    ]
+                ],
+                'onChange' => self::MODULE_PREFIX . '_ShowLibraries($id, $SelectLibrary);',
+                'value'    => 0
+            ];
+
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'caption' => ' '
+            ];
+
+        //Command control
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label1',
+                'caption' => 'Ablaufsteuerung',
+                'visible' => false
+            ];
+
+        $actionName = 'CommandControl';
+        $libraryGUID = self::COMMAND_CONTROL_LIBRARY_GUID;
+        $moduleGUID = self::COMMAND_CONTROL_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row1',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Ablaufsteuerung',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm call
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label2',
+                'caption' => 'Alarmanruf',
+                'visible' => false
+            ];
+
+        $actionName = 'AlarmCall';
+        $libraryGUID = self::ALARM_CALL_LIBRARY_GUID;
+        $moduleGUID = self::ALARM_CALL_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row2',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmanruf',
+                                'value'   => $moduleGUID
+                            ],
+                            [
+                                'caption' => 'Alarmanruf NeXXt Mobile',
+                                'value'   => self::ALARM_CALL_NEXXT_MOBILE_MODULE_GUID
+                            ],
+                            [
+                                'caption' => 'Alarmanruf VoIP',
+                                'value'   => self::ALARM_CALL_VOIP_MODULE_GUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm light
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label3',
+                'caption' => 'Alarmbeleuchtung',
+                'visible' => false
+            ];
+
+        $actionName = 'AlarmLight';
+        $libraryGUID = self::ALARM_LIGHT_LIBRARY_GUID;
+        $moduleGUID = self::ALARM_LIGHT_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row3',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmbeleuchtung',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alerting
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label4',
+                'caption' => 'Alarmierung',
+                'visible' => false
+            ];
+
+        $actionName = 'Alerting';
+        $libraryGUID = self::ALERTING_LIBRARY_GUID;
+        $moduleGUID = self::ALERTING_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row4',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmierung',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm protocol
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label5',
+                'caption' => 'Alarmprotokoll',
+                'visible' => false
+            ];
+
+        $actionName = 'AlarmProtocol';
+        $libraryGUID = self::ALARM_PROTOCOL_LIBRARY_GUID;
+        $moduleGUID = self::ALARM_PROTOCOL_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row5',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmprotokoll',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm siren
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label6',
+                'caption' => 'Alarmsirene',
+                'visible' => false
+            ];
+
+        $actionName = 'AlarmSiren';
+        $libraryGUID = self::ALARM_SIREN_LIBRARY_GUID;
+        $moduleGUID = self::ALARM_SIREN_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row6',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmsirene',
+                                'value'   => $moduleGUID
+                            ],
+                            [
+                                'caption' => 'Alarmsirene Homematic',
+                                'value'   => self::ALARM_SIREN_HOMEMATIC_MODULE_GUID
+                            ],
+                            [
+                                'caption' => 'Alarmsirene Homematic IP',
+                                'value'   => self::ALARM_SIREN_HOMEMATICIP_MODULE_GUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm zone
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label7',
+                'caption' => 'Alarmzone',
+                'visible' => false
+            ];
+
+        $actionName = 'AlarmZone';
+        $libraryGUID = self::ALARM_ZONE_LIBRARY_GUID;
+        $moduleGUID = self::ALARM_ZONE_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row7',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Alarmzone',
+                                'value'   => $moduleGUID
+                            ],
+                            [
+                                'caption' => 'Alarmzonensteuerung',
+                                'value'   => self::ALARM_ZONE_CONTROL_MODULE_GUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Battery detector
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label8',
+                'caption' => 'Batteriemelder',
+                'visible' => false
+            ];
+
+        $actionName = 'BatteryDetector';
+        $libraryGUID = self::BATTERY_DETECTOR_LIBRARY_GUID;
+        $moduleGUID = self::BATTERY_DETECTOR_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row8',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Batteriemelder',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Notification
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label9',
+                'caption' => 'Benachrichtigung',
+                'visible' => false
+            ];
+
+        $actionName = 'Notification';
+        $libraryGUID = self::NOTIFICATION_LIBRARY_GUID;
+        $moduleGUID = self::NOTIFICATION_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row9',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Benachrichtigung',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Motion detector status
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label10',
+                'caption' => 'Bewegungsmelderstatus',
+                'visible' => false
+            ];
+
+        $actionName = 'MotionDetectorStatus';
+        $libraryGUID = self::MOTION_DETECTOR_STATUS_LIBRARY_GUID;
+        $moduleGUID = self::MOTION_DETECTOR_STATUS_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row10',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Bewegungsmelderstatus',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Door window status
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label11',
+                'caption' => 'Fensterstatus',
+                'visible' => false
+            ];
+
+        $actionName = 'DoorWindowStatus';
+        $libraryGUID = self::DOOR_WINDOW_STATUS_LIBRARY_GUID;
+        $moduleGUID = self::DOOR_WINDOW_STATUS_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row11',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Fensterstatus',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Remote control
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label12',
+                'caption' => 'Fernbedienung',
+                'visible' => false
+            ];
+
+        $actionName = 'RemoteControl';
+        $libraryGUID = self::REMOTE_CONTROL_LIBRARY_GUID;
+        $moduleGUID = self::REMOTE_CONTROL_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row12',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Fernbedienung',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Mailer
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label13',
+                'caption' => 'Mailer',
+                'visible' => false
+            ];
+
+        $actionName = 'Mailer';
+        $libraryGUID = self::MAILER_LIBRARY_GUID;
+        $moduleGUID = self::MAILER_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row13',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Mailer',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Status display
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label14',
+                'caption' => 'Statusanzeige',
+                'visible' => false
+            ];
+
+        $actionName = 'StatusDisplay';
+        $libraryGUID = self::STATUS_DISPLAY_LIBRARY_GUID;
+        $moduleGUID = self::STATUS_DISPLAY_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row14',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Statusanzeige',
+                                'value'   => $moduleGUID
+                            ],
+                            [
+                                'caption' => 'Statusanzeige Homematic',
+                                'value'   => self::STATUS_DISPLAY_HOMEMATIC_MODULE_GUID
+                            ],
+                            [
+                                'caption' => 'Statusanzeige Homematic IP',
+                                'value'   => self::STATUS_DISPLAY_HOMEMATICIP_MODULE_GUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Maintenance mode
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label15',
+                'caption' => 'Wartungsmodus',
+                'visible' => false
+            ];
+
+        $actionName = 'MaintenanceMode';
+        $libraryGUID = self::MAINTENANCE_MODE_LIBRARY_GUID;
+        $moduleGUID = self::MAINTENANCE_MODE_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row15',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Wartungsmodus',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Warning indicator
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label16',
+                'caption' => 'Warnmelder',
+                'visible' => false
+            ];
+
+        $actionName = 'WarningIndicator';
+        $libraryGUID = self::WARNING_INDICATOR_LIBRARY_GUID;
+        $moduleGUID = self::WARNING_INDICATOR_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row16',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Warnmelder',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Central status
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label17',
+                'caption' => 'Zentralenstatus',
+                'visible' => false
+            ];
+
+        $actionName = 'CentralStatus';
+        $libraryGUID = self::CENTRAL_STATUS_LIBRARY_GUID;
+        $moduleGUID = self::CENTRAL_STATUS_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row17',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Zentralenstatus',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'caption' => ' '
+            ];
+
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'caption' => ' '
+            ];
+
+        //Dummy info message
+        $form['actions'][] =
+            [
+                'type'    => 'PopupAlert',
+                'name'    => 'PopupAlert',
+                'visible' => false,
+                'popup'   => [
+                    'closeCaption' => 'OK',
+                    'items'        => [
+                        [
+                            'type'    => 'Label',
+                            'name'    => 'PopupMessage',
+                            'caption' => '',
+                            'visible' => true
+                        ],
+                        [
+                            'type'          => 'ProgressBar',
+                            'name'          => 'PopupProgressBar',
+                            'caption'       => 'Fortschritt',
+                            'indeterminate' => true,
+                            'visible'       => false
+                        ]
+                    ]
+                ]
+            ];
+
+        ########## Status
+        /*
+        $form['status'][] = [
+            'code'    => 101,
+            'icon'    => 'active',
+            'caption' => $module['ModuleName'] . ' wird erstellt',
+        ];
+        $form['status'][] = [
+            'code'    => 102,
+            'icon'    => 'active',
+            'caption' => $module['ModuleName'] . ' ist aktiv',
+        ];
+        $form['status'][] = [
+            'code'    => 103,
+            'icon'    => 'active',
+            'caption' => $module['ModuleName'] . ' wird gelöscht',
+        ];
+        $form['status'][] = [
+            'code'    => 104,
+            'icon'    => 'inactive',
+            'caption' => $module['ModuleName'] . ' ist inaktiv',
+        ];
+        $form['status'][] = [
+            'code'    => 200,
+            'icon'    => 'inactive',
+            'caption' => 'Es ist Fehler aufgetreten, weitere Informationen unter Meldungen, im Log oder Debug!',
+        ];
+         */
+
+        return json_encode($form);
     }
 }

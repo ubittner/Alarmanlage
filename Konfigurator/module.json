@@ -1,10 +1,10 @@
 {
     "id": "{E3ECD875-9AFF-F90B-45F8-A218572A0FAE}",
-    "name": "Alarmanlagenkonfigurator",
+    "name": "Alarmanlage Konfigurator",
     "type": 4,
-    "vendor": "UB",
+    "vendor": "Ulrich Bittner",
     "aliases": [
-        "Alarmanlagenkonfigurator"
+        "Alarmanlage Konfigurator"
     ],
     "url": "https://github.com/ubittner/Alarmanlage/tree/main/Konfigurator",
     "parentRequirements": [],

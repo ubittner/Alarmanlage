@@ -17,16 +17,59 @@ declare(strict_types=1);
 
 include_once __DIR__ . '/helper/AAK_autoload.php';
 
-class Alarmanlagenkonfigurator extends IPSModule
+class AlarmanlageKonfigurator extends IPSModule
 {
     //Helper
     use AAK_Config;
 
     //Constants
+    private const LIBRARY_GUID = '{CEDAB842-9168-AC25-2831-BA23E069A6A3}';
+    private const MODULE_GUID = '{E3ECD875-9AFF-F90B-45F8-A218572A0FAE}';
     private const MODULE_NAME = 'Alarmanlagenkonfigurator';
     private const MODULE_PREFIX = 'AAK';
     private const MODULE_VERSION = '7.0-5, 26.03.2023';
     private const MODULE_CONTROL_GUID = '{B8A5067A-AFC2-3798-FEDC-BCD02A45615E}';
+    private const COMMAND_CONTROL_LIBRARY_GUID = '{0DF8D60F-8E07-8BAE-EF95-7298743FCEF6}';
+    private const COMMAND_CONTROL_MODULE_GUID = '{0559B287-1052-A73E-B834-EBD9B62CB938}';
+    private const ALARM_CALL_LIBRARY_GUID = '{5EF26FF6-6DD0-C972-1F7A-BC3CBA516042}';
+    private const ALARM_CALL_MODULE_GUID = '{FA8543F8-C672-8E9F-A5A9-90103612EBFA}';
+    private const ALARM_CALL_NEXXT_MOBILE_MODULE_GUID = '{CCCE18B9-245A-900F-5DCF-CF11527571CE}';
+    private const ALARM_CALL_VOIP_MODULE_GUID = '{87E8FFF5-2E89-8C9E-3345-9A09D159E4B2}';
+    private const ALARM_LIGHT_LIBRARY_GUID = '{71FE24C0-4A75-D30F-0D64-CED273B58600}';
+    private const ALARM_LIGHT_MODULE_GUID = '{15AC1D3E-06CC-0ECE-275A-914A0632DF58}';
+    private const ALERTING_LIBRARY_GUID = '{9D16FD4F-37AA-96D0-EC29-8203B09156B2}';
+    private const ALERTING_MODULE_GUID = '{2470D8A2-135B-98CA-6A89-70A18DC46CAE}';
+    private const ALARM_PROTOCOL_LIBRARY_GUID = '{60C35BE7-ED7C-AD82-EFCA-8B2AD23579F6}';
+    private const ALARM_PROTOCOL_MODULE_GUID = '{66BDB59B-E80F-E837-6640-005C32D5FC24}';
+    private const ALARM_SIREN_LIBRARY_GUID = '{FAA4CD97-9BA5-6415-C57C-EB2BD5B1E143}';
+    private const ALARM_SIREN_MODULE_GUID = '{72CC55F4-4A05-D3A4-AEFB-1B1E2C0EAF14}';
+    private const ALARM_SIREN_HOMEMATIC_MODULE_GUID = '{90C71DCF-603A-A5C8-7955-CB3FFC4FF58C}';
+    private const ALARM_SIREN_HOMEMATICIP_MODULE_GUID = '{C2E1BF4E-FB45-9023-85F0-5C80BCE99D45}';
+    private const ALARM_ZONE_LIBRARY_GUID = '{F227BA9C-8112-3B9F-1149-9B53E10D4F79}';
+    private const ALARM_ZONE_MODULE_GUID = '{127AB08D-CD10-801D-D419-442CDE6E5C61}';
+    private const ALARM_ZONE_CONTROL_MODULE_GUID = '{79BB840E-65C1-06E0-E1DD-BAFEFC514848}';
+    private const BATTERY_DETECTOR_LIBRARY_GUID = '{30910CF9-AC0D-A48F-267D-24CE177C6B8C}';
+    private const BATTERY_DETECTOR_MODULE_GUID = '{3C878C9D-63E0-767D-494C-35AC950EA76D}';
+    private const NOTIFICATION_LIBRARY_GUID = '{76D34084-7695-02EF-DAA8-82041E08AB72}';
+    private const NOTIFICATION_MODULE_GUID = '{BDAB70AA-B45D-4CB4-3D65-509CFF0969F9}';
+    private const MOTION_DETECTOR_STATUS_LIBRARY_GUID = '{8F305D5E-2380-3326-073D-0EAC7A47184C}';
+    private const MOTION_DETECTOR_STATUS_MODULE_GUID = '{F36EE238-6594-3B70-F191-0E361DB0596C}';
+    private const DOOR_WINDOW_STATUS_LIBRARY_GUID = '{72BAFA29-C34E-43F0-D656-BC6B72D83230}';
+    private const DOOR_WINDOW_STATUS_MODULE_GUID = '{BF9B17E3-0F5E-208E-7F6F-F3EECC9752A0}';
+    private const REMOTE_CONTROL_LIBRARY_GUID = '{B98CAD42-EF00-5277-BB1C-0760EA2AD0C4}';
+    private const REMOTE_CONTROL_MODULE_GUID = '{73F6BEB3-115F-4018-A1D3-C6C16B939986}';
+    private const MAILER_LIBRARY_GUID = '{9B229E71-4D0F-E386-330F-1AC86B01BE18}';
+    private const MAILER_MODULE_GUID = '{C6CF3C5C-E97B-97AB-ADA2-E834976C6A92}';
+    private const STATUS_DISPLAY_LIBRARY_GUID = '{3E8B8394-FC34-8C9A-6324-A03FB7E64B29}';
+    private const STATUS_DISPLAY_MODULE_GUID = '{A059E898-5F10-F396-1886-3FB86DC92DD3}';
+    private const STATUS_DISPLAY_HOMEMATIC_MODULE_GUID = '{17C9B00D-3C66-2B99-7F83-604DA32C91E6}';
+    private const STATUS_DISPLAY_HOMEMATICIP_MODULE_GUID = '{B811C5C6-4DB9-2E1E-D8F8-1532D1A2CFCD}';
+    private const MAINTENANCE_MODE_LIBRARY_GUID = '{A2FDCE6D-C181-9B29-638D-FEB803E5DEA0}';
+    private const MAINTENANCE_MODE_MODULE_GUID = '{EA65A9F4-68CA-7891-E4B7-34E24B7A4745}';
+    private const WARNING_INDICATOR_LIBRARY_GUID = '{70D8F340-4128-EEC8-3FCE-5C3FA449B64F}';
+    private const WARNING_INDICATOR_MODULE_GUID = '{D2516F46-D422-3393-ABF6-2ACF5CA7070B}';
+    private const CENTRAL_STATUS_LIBRARY_GUID = '{E095D925-0603-3299-3534-EF11FC14E13E}';
+    private const CENTRAL_STATUS_MODULE_GUID = '{2ED87E59-10F7-2B7E-827E-70BB637E2856}';
 
     public function Create()
     {
@@ -35,82 +78,27 @@ class Alarmanlagenkonfigurator extends IPSModule
 
         ########## Properties
 
-        //Functions
+        //Info
         $this->RegisterPropertyString('Note', '');
 
         //Repositories
-        $this->RegisterPropertyString('CommandControlName', 'Ablaufsteuerung');
         $this->RegisterPropertyString('CommandControlURL', 'https://github.com/ubittner/Ablaufsteuerung');
-        $this->RegisterPropertyString('AlarmCallName', 'Alarmanruf');
         $this->RegisterPropertyString('AlarmCallURL', 'https://github.com/ubittner/Alarmanruf');
-        $this->RegisterPropertyString('AlarmLightName', 'Alarmbeleuchtung');
         $this->RegisterPropertyString('AlarmLightURL', 'https://github.com/ubittner/Alarmbeleuchtung');
-        $this->RegisterPropertyString('AlertingName', 'Alarmierung');
         $this->RegisterPropertyString('AlertingURL', 'https://github.com/ubittner/Alarmierung');
-        $this->RegisterPropertyString('AlarmProtocolName', 'Alarmprotokoll');
         $this->RegisterPropertyString('AlarmProtocolURL', 'https://github.com/ubittner/Alarmprotokoll');
-        $this->RegisterPropertyString('AlarmSirenName', 'Alarmsirene');
         $this->RegisterPropertyString('AlarmSirenURL', 'https://github.com/ubittner/Alarmsirene');
-        $this->RegisterPropertyString('AlarmZoneName', 'Alarmzone');
         $this->RegisterPropertyString('AlarmZoneURL', 'https://github.com/ubittner/Alarmzone');
-        $this->RegisterPropertyString('BatteryDetectorName', 'Batteriemelder');
         $this->RegisterPropertyString('BatteryDetectorURL', 'https://github.com/ubittner/Batteriemelder');
-        $this->RegisterPropertyString('NotificationName', 'Benachrichtigung');
         $this->RegisterPropertyString('NotificationURL', 'https://github.com/ubittner/Benachrichtigung');
-        $this->RegisterPropertyString('MotionDetectorStatusName', 'Bewegungsmelderstatus');
         $this->RegisterPropertyString('MotionDetectorStatusURL', 'https://github.com/ubittner/Bewegungsmelderstatus');
-        $this->RegisterPropertyString('DoorWindowStatusName', 'Fensterstatus');
         $this->RegisterPropertyString('DoorWindowStatusURL', 'https://github.com/ubittner/Fensterstatus');
-        $this->RegisterPropertyString('RemoteControlName', 'Fernbedienung');
         $this->RegisterPropertyString('RemoteControlURL', 'https://github.com/ubittner/Fernbedienung');
-        $this->RegisterPropertyString('MailerName', 'Mailer');
         $this->RegisterPropertyString('MailerURL', 'https://github.com/ubittner/Mailer');
-        $this->RegisterPropertyString('StatusDisplayName', 'Statusanzeige');
         $this->RegisterPropertyString('StatusDisplayURL', 'https://github.com/ubittner/Statusanzeige');
-        $this->RegisterPropertyString('WarningIndicatorName', 'Warnmelder');
+        $this->RegisterPropertyString('MaintenanceModeURL', 'https://github.com/ubittner/Wartungsmodus');
         $this->RegisterPropertyString('WarningIndicatorURL', 'https://github.com/ubittner/Warnmelder');
-        $this->RegisterPropertyString('MaintenanceModeName', 'Wartungsmodus');
-        $this->RegisterPropertyString('MaintenanceURL', 'https://github.com/ubittner/Wartungsmodus');
-        $this->RegisterPropertyString('CentralStatusName', 'Zentralenstatus');
         $this->RegisterPropertyString('CentralStatusURL', 'https://github.com/ubittner/Zentralenstatus');
-
-        //Modules
-        $this->RegisterPropertyBoolean('UseCommandControl', true);
-        $this->RegisterPropertyBoolean('UseAlarmCall', true);
-        $this->RegisterPropertyBoolean('UseAlarmLight', true);
-        $this->RegisterPropertyBoolean('UseAlerting', true);
-        $this->RegisterPropertyBoolean('UseAlarmProtocol', true);
-        $this->RegisterPropertyBoolean('UseAlarmSiren', true);
-        $this->RegisterPropertyBoolean('UseAlarmZone', true);
-        $this->RegisterPropertyBoolean('UseBatteryDetector', true);
-        $this->RegisterPropertyBoolean('UseNotification', true);
-        $this->RegisterPropertyBoolean('UseMotionDetectorStatus', true);
-        $this->RegisterPropertyBoolean('UseDoorWindowStatus', true);
-        $this->RegisterPropertyBoolean('UseRemoteControl', true);
-        $this->RegisterPropertyBoolean('UseMailer', true);
-        $this->RegisterPropertyBoolean('UseStatusDisplay', true);
-        $this->RegisterPropertyBoolean('UseWarningIndicator', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceMode', true);
-        $this->RegisterPropertyBoolean('UseCentralStatus', true);
-
-        //Instances (unused at the moment)
-        $this->RegisterPropertyBoolean('UseCommandControlInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmCallInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmLightInstance', true);
-        $this->RegisterPropertyBoolean('UseAlertingInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmProtocolInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmSirenInstance', true);
-        $this->RegisterPropertyBoolean('UseAlarmZoneInstance', true);
-        $this->RegisterPropertyBoolean('UseBatteryDetectorInstance', true);
-        $this->RegisterPropertyBoolean('UseNotificationInstance', true);
-        $this->RegisterPropertyBoolean('UseMotionDetectorStatusInstance', true);
-        $this->RegisterPropertyBoolean('UseDoorWindowStatusInstance', true);
-        $this->RegisterPropertyBoolean('UseRemoteControlInstance', true);
-        $this->RegisterPropertyBoolean('UseMailerInstance', true);
-        $this->RegisterPropertyBoolean('UseStatusDisplayInstance', true);
-        $this->RegisterPropertyBoolean('UseWarningIndicatorInstance', true);
-        $this->RegisterPropertyBoolean('UseMaintenanceModeInstance', true);
-        $this->RegisterPropertyBoolean('UseCentralStatusInstance', true);
     }
 
     public function ApplyChanges()
@@ -137,47 +125,106 @@ class Alarmanlagenkonfigurator extends IPSModule
 
     #################### Public
 
-    public function AddModules(): void
+    public function UIShowMessage(string $Message): void
     {
-        $id = IPS_GetInstanceListByModuleID(self::MODULE_CONTROL_GUID)[0];
-        $this->SendDebug(__FUNCTION__, 'Module Control ID: ' . $id, 0);
-        if ($id >= 1 && @IPS_ObjectExists($id)) {
-            $properties = [];
-            $properties[] = ['useModule' => 'UseCommandControl', 'moduleName' => 'CommandControlName', 'moduleURL' => 'CommandControlURL'];
-            $properties[] = ['useModule' => 'UseAlarmCall', 'moduleName' => 'AlarmCallName', 'moduleURL' => 'AlarmCallURL'];
-            $properties[] = ['useModule' => 'UseAlarmLight', 'moduleName' => 'AlarmLightName', 'moduleURL' => 'AlarmLightURL'];
-            $properties[] = ['useModule' => 'UseAlerting', 'moduleName' => 'AlertingName', 'moduleURL' => 'AlertingURL'];
-            $properties[] = ['useModule' => 'UseAlarmProtocol', 'moduleName' => 'AlarmProtocolName', 'moduleURL' => 'AlarmProtocolURL'];
-            $properties[] = ['useModule' => 'UseAlarmSiren', 'moduleName' => 'AlarmSirenName', 'moduleURL' => 'AlarmSirenURL'];
-            $properties[] = ['useModule' => 'UseAlarmZone', 'moduleName' => 'AlarmZoneName', 'moduleURL' => 'AlarmZoneURL'];
-            $properties[] = ['useModule' => 'UseBatteryDetector', 'moduleName' => 'BatteryDetectorName', 'moduleURL' => 'BatteryDetectorURL'];
-            $properties[] = ['useModule' => 'UseNotification', 'moduleName' => 'NotificationName', 'moduleURL' => 'NotificationURL'];
-            $properties[] = ['useModule' => 'UseMotionDetectorStatus', 'moduleName' => 'MotionDetectorStatusName', 'moduleURL' => 'MotionDetectorStatusURL'];
-            $properties[] = ['useModule' => 'UseDoorWindowStatus', 'moduleName' => 'DoorWindowStatusName', 'moduleURL' => 'DoorWindowStatusURL'];
-            $properties[] = ['useModule' => 'UseRemoteControl', 'moduleName' => 'RemoteControlName', 'moduleURL' => 'RemoteControlURL'];
-            $properties[] = ['useModule' => 'UseMailer', 'moduleName' => 'MailerName', 'moduleURL' => 'MailerURL'];
-            $properties[] = ['useModule' => 'UseStatusDisplay', 'moduleName' => 'StatusDisplayName', 'moduleURL' => 'StatusDisplayURL'];
-            $properties[] = ['useModule' => 'UseWarningIndicator', 'moduleName' => 'WarningIndicatorName', 'moduleURL' => 'WarningIndicatorURL'];
-            $properties[] = ['useModule' => 'UseMaintenanceMode', 'moduleName' => 'MaintenanceModeName', 'moduleURL' => 'MaintenanceURL'];
-            $properties[] = ['useModule' => 'UseCentralStatus', 'moduleName' => 'CentralStatusName', 'moduleURL' => 'CentralStatusURL'];
-            foreach ($properties as $property) {
-                if ($this->ReadPropertyBoolean($property['useModule'])) {
-                    //Check for existing module
-                    $list = MC_GetModuleList($id);
-                    $moduleName = $this->ReadPropertyString($property['moduleName']);
-                    $this->SendDebug(__FUNCTION__, 'Modulname: ' . $moduleName, 0);
-                    if (!in_array($moduleName, $list)) {
-                        //Add module repository to module control
-                        $this->SendDebug(__FUNCTION__, 'Das Modul ' . $moduleName . ' wird hinzugefügt', 0);
-                        $url = $this->ReadPropertyString($property['moduleURL']);
-                        $this->SendDebug(__FUNCTION__, 'URL: ' . $url, 0);
-                        @MC_CreateModule($id, $url);
-                    } else {
-                        $this->SendDebug(__FUNCTION__, 'Das Modul ' . $moduleName . ' ist bereits vorhanden!', 0);
-                    }
+        $this->UpdateFormField('InfoMessage', 'visible', true);
+        $this->UpdateFormField('InfoMessageLabel', 'caption', $Message);
+    }
+
+    public function UpdateField(string $Name, string $Parameter, string $Value): void
+    {
+        $this->UpdateFormField($Name, $Parameter, $Value);
+    }
+
+    public function AddLibrary(string $LibraryName): void
+    {
+        $library['CommandControl'] = ['GUID' => self::COMMAND_CONTROL_LIBRARY_GUID, 'moduleName' => 'Ablaufsteuerung', 'URL' => 'CommandControlURL'];
+        $library['AlarmCall'] = ['GUID' => self::ALARM_CALL_LIBRARY_GUID, 'moduleName' => 'Alarmanruf', 'URL' => 'AlarmCallURL'];
+        $library['AlarmLight'] = ['GUID' => self::ALARM_LIGHT_LIBRARY_GUID, 'moduleName' => 'Alarmbeleuchtung', 'URL' => 'AlarmLightURL'];
+        $library['Alerting'] = ['GUID' => self::ALERTING_LIBRARY_GUID, 'moduleName' => 'Alarmierung', 'URL' => 'AlertingURL'];
+        $library['AlarmProtocol'] = ['GUID' => self::ALARM_PROTOCOL_LIBRARY_GUID, 'moduleName' => 'Alarmprotokoll', 'URL' => 'AlarmProtocolURL'];
+        $library['AlarmSiren'] = ['GUID' => self::ALARM_SIREN_LIBRARY_GUID, 'moduleName' => 'Alarmsirene', 'URL' => 'AlarmSirenURL'];
+        $library['AlarmZone'] = ['GUID' => self::ALARM_ZONE_LIBRARY_GUID, 'moduleName' => 'Alarmzone', 'URL' => 'AlarmZoneURL'];
+        $library['BatteryDetector'] = ['GUID' => self::BATTERY_DETECTOR_LIBRARY_GUID, 'moduleName' => 'Batteriemelder', 'URL' => 'BatteryDetectorURL'];
+        $library['Notification'] = ['GUID' => self::NOTIFICATION_LIBRARY_GUID, 'moduleName' => 'Benachrichtigung', 'URL' => 'NotificationURL'];
+        $library['MotionDetectorStatus'] = ['GUID' => self::MOTION_DETECTOR_STATUS_LIBRARY_GUID, 'moduleName' => 'Bewegungsmelderstatus', 'URL' => 'MotionDetectorStatusURL'];
+        $library['DoorWindowStatus'] = ['GUID' => self::DOOR_WINDOW_STATUS_LIBRARY_GUID, 'moduleName' => 'Fensterstatus', 'URL' => 'DoorWindowStatusURL'];
+        $library['RemoteControl'] = ['GUID' => self::REMOTE_CONTROL_LIBRARY_GUID, 'moduleName' => 'Fernbedienung', 'URL' => 'RemoteControlURL'];
+        $library['Mailer'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Mailer', 'URL' => 'MailerURL'];
+        $library['StatusDisplay'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Statusanzeige', 'URL' => 'StatusDisplayURL'];
+        $library['MaintenanceMode'] = ['GUID' => self::MAINTENANCE_MODE_LIBRARY_GUID, 'moduleName' => 'Wartungsmodus', 'URL' => 'MaintenanceModeURL'];
+        $library['WarningIndicator'] = ['GUID' => self::WARNING_INDICATOR_LIBRARY_GUID, 'moduleName' => 'Warnmelder', 'URL' => 'WarningIndicatorURL'];
+        $library['CentralStatus'] = ['GUID' => self::CENTRAL_STATUS_LIBRARY_GUID, 'moduleName' => 'Zentralenstatus', 'URL' => 'CentralStatusURL'];
+        $name = $library[$LibraryName]['moduleName'];
+        $this->SendDebug(__FUNCTION__, $LibraryName . ' = ' . $name, 0);
+        if (IPS_LibraryExists($library[$LibraryName]['GUID'])) {
+            $message = 'Abbruch: Bibliothek ' . $name . ' existiert bereits!';
+            $this->UpdateFormField('PopupProgressBar', 'visible', false);
+            $this->UpdateFormField('PopupMessage', 'caption', $message);
+            $this->UpdateFormField('PopupAlert', 'visible', true);
+        } else {
+            $id = IPS_GetInstanceListByModuleID(self::MODULE_CONTROL_GUID)[0];
+            if ($id >= 1 && @IPS_ObjectExists($id)) {
+                $this->UpdateFormField('PopupProgressBar', 'caption', $name);
+                $this->UpdateFormField('PopupProgressBar', 'visible', true);
+                $this->UpdateFormField('PopupAlert', 'visible', true);
+                $result = @MC_CreateModule($id, $this->ReadPropertyString($library[$LibraryName]['URL']));
+                $this->UpdateFormField('PopupProgressBar', 'visible', false);
+                $message = 'Fehler: Bibliothek ' . $name . ' konnte nicht hinzugefügt werden!';
+                if ($result) {
+                    $this->UpdateFormField('Add' . $LibraryName . 'LibraryButton', 'enabled', false);
+                    $this->UpdateFormField('Select' . $LibraryName . 'Module', 'visible', true);
+                    $this->UpdateFormField('Create' . $LibraryName . 'InstanceButton', 'visible', true);
+                    $this->UpdateFormField('Select' . $LibraryName . 'Instance', 'visible', true);
+                    $message = 'Bibliothek ' . $name . ' wurde erfolgreich hinzugefügt!';
                 }
+                $this->UpdateFormField('PopupMessage', 'caption', $message);
             }
         }
+    }
+
+    public function CreateInstance(string $ModuleGUID, int $CategoryID): void
+    {
+        $module[self::COMMAND_CONTROL_MODULE_GUID] = ['moduleName' => 'Ablaufsteuerung', 'actionName' => 'CommandControl'];
+        $module[self::ALARM_CALL_MODULE_GUID] = ['moduleName' => 'Alarmanruf', 'actionName' => 'AlarmCall'];
+        $module[self::ALARM_CALL_NEXXT_MOBILE_MODULE_GUID] = ['moduleName' => 'Alarmanruf NeXXt Mobile', 'actionName' => 'AlarmCall'];
+        $module[self::ALARM_CALL_VOIP_MODULE_GUID] = ['moduleName' => 'Alarmanruf VoIP', 'actionName' => 'AlarmCall'];
+        $module[self::ALARM_LIGHT_MODULE_GUID] = ['moduleName' => 'Alarmbeleuchtung', 'actionName' => 'AlarmLight'];
+        $module[self::ALERTING_MODULE_GUID] = ['moduleName' => 'Alarmierung', 'actionName' => 'Alerting'];
+        $module[self::ALARM_PROTOCOL_MODULE_GUID] = ['moduleName' => 'Alarmprotokoll', 'actionName' => 'AlarmProtocol'];
+        $module[self::ALARM_SIREN_MODULE_GUID] = ['moduleName' => 'Alarmsirene', 'actionName' => 'AlarmSiren'];
+        $module[self::ALARM_SIREN_HOMEMATIC_MODULE_GUID] = ['moduleName' => 'Alarmsirene Homematic', 'actionName' => 'AlarmSiren'];
+        $module[self::ALARM_SIREN_HOMEMATICIP_MODULE_GUID] = ['moduleName' => 'Alarmsirene Homematic IP', 'actionName' => 'AlarmSiren'];
+        $module[self::ALARM_ZONE_MODULE_GUID] = ['moduleName' => 'Alarmzone', 'actionName' => 'AlarmZone'];
+        $module[self::ALARM_ZONE_CONTROL_MODULE_GUID] = ['moduleName' => 'Alarmzone', 'actionName' => 'AlarmZone'];
+        $module[self::BATTERY_DETECTOR_MODULE_GUID] = ['moduleName' => 'Batteriemelder', 'actionName' => 'BatteryDetector'];
+        $module[self::NOTIFICATION_MODULE_GUID] = ['moduleName' => 'Benachrichtigung', 'actionName' => 'Notification'];
+        $module[self::MOTION_DETECTOR_STATUS_MODULE_GUID] = ['moduleName' => 'Bewegungsmelderstatus', 'actionName' => 'MotionDetectorStatus'];
+        $module[self::DOOR_WINDOW_STATUS_MODULE_GUID] = ['moduleName' => 'Fensterstatus', 'actionName' => 'DoorWindowStatus'];
+        $module[self::REMOTE_CONTROL_MODULE_GUID] = ['moduleName' => 'Fernbedienung', 'actionName' => 'RemoteControl'];
+        $module[self::MAILER_MODULE_GUID] = ['moduleName' => 'Mailer', 'actionName' => 'Mailer'];
+        $module[self::STATUS_DISPLAY_MODULE_GUID] = ['moduleName' => 'Statusanzeige', 'actionName' => 'StatusDisplay'];
+        $module[self::STATUS_DISPLAY_HOMEMATIC_MODULE_GUID] = ['moduleName' => 'Statusanzeige Homematic', 'actionName' => 'StatusDisplay'];
+        $module[self::STATUS_DISPLAY_HOMEMATICIP_MODULE_GUID] = ['moduleName' => 'Statusanzeige Homematic IP', 'actionName' => 'StatusDisplay'];
+        $module[self::MAINTENANCE_MODE_MODULE_GUID] = ['moduleName' => 'Wartungsmodus', 'actionName' => 'MaintenanceMode'];
+        $module[self::WARNING_INDICATOR_MODULE_GUID] = ['moduleName' => 'Warnmelder', 'actionName' => 'WarningIndicator'];
+        $module[self::CENTRAL_STATUS_MODULE_GUID] = ['moduleName' => 'Zentralenstatus', 'actionName' => 'CentralStatus'];
+        $name = $module[$ModuleGUID]['moduleName'];
+        $actionName = $module[$ModuleGUID]['actionName'];
+        $this->SendDebug(__FUNCTION__, $ModuleGUID . ' = ' . $name, 0);
+        $id = @IPS_CreateInstance($ModuleGUID);
+        if (is_int($id)) {
+            IPS_SetName($id, $name);
+            IPS_SetParent($id, $CategoryID);
+            $this->UpdateFormField('Add' . $actionName . 'LibraryButton', 'enabled', false);
+            $this->UpdateFormField('Create' . $actionName . 'InstanceButton', 'enabled', true);
+            $this->UpdateFormField('Select' . $actionName . 'Module', 'enabled', true);
+            $message = 'Instanz ' . $name . ' mit der ID ' . $id . ' wurde erfolgreich erstellt!';
+        } else {
+            $message = 'Instanz ' . $name . ' konnte nicht erstellt werden!';
+        }
+        $this->UpdateFormField('PopupMessage', 'caption', $message);
+        $this->UpdateFormField('PopupAlert', 'visible', true);
     }
 
     #################### Private

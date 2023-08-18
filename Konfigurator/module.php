@@ -151,7 +151,7 @@ class AlarmanlageKonfigurator extends IPSModule
         $library['DoorWindowStatus'] = ['GUID' => self::DOOR_WINDOW_STATUS_LIBRARY_GUID, 'moduleName' => 'Fensterstatus', 'URL' => 'DoorWindowStatusURL'];
         $library['RemoteControl'] = ['GUID' => self::REMOTE_CONTROL_LIBRARY_GUID, 'moduleName' => 'Fernbedienung', 'URL' => 'RemoteControlURL'];
         $library['Mailer'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Mailer', 'URL' => 'MailerURL'];
-        $library['StatusDisplay'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Statusanzeige', 'URL' => 'StatusDisplayURL'];
+        $library['StatusDisplay'] = ['GUID' => self::STATUS_DISPLAY_LIBRARY_GUID, 'moduleName' => 'Statusanzeige', 'URL' => 'StatusDisplayURL'];
         $library['MaintenanceMode'] = ['GUID' => self::MAINTENANCE_MODE_LIBRARY_GUID, 'moduleName' => 'Wartungsmodus', 'URL' => 'MaintenanceModeURL'];
         $library['WarningIndicator'] = ['GUID' => self::WARNING_INDICATOR_LIBRARY_GUID, 'moduleName' => 'Warnmelder', 'URL' => 'WarningIndicatorURL'];
         $library['CentralStatus'] = ['GUID' => self::CENTRAL_STATUS_LIBRARY_GUID, 'moduleName' => 'Zentralenstatus', 'URL' => 'CentralStatusURL'];

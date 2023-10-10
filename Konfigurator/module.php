@@ -31,6 +31,8 @@ class AlarmanlageKonfigurator extends IPSModule
     private const MODULE_CONTROL_GUID = '{B8A5067A-AFC2-3798-FEDC-BCD02A45615E}';
     private const COMMAND_CONTROL_LIBRARY_GUID = '{0DF8D60F-8E07-8BAE-EF95-7298743FCEF6}';
     private const COMMAND_CONTROL_MODULE_GUID = '{0559B287-1052-A73E-B834-EBD9B62CB938}';
+    private const UPDATE_DETECTOR_LIBRARY_GUID = '{D4EA0559-08BA-52EC-2933-E4530A2B5769}';
+    private const UPDATE_DETECTOR_MODULE_GUID = '{EAC3392A-00F4-AC39-230E-34C28BAAE9B3}';
     private const ALARM_CALL_LIBRARY_GUID = '{5EF26FF6-6DD0-C972-1F7A-BC3CBA516042}';
     private const ALARM_CALL_MODULE_GUID = '{FA8543F8-C672-8E9F-A5A9-90103612EBFA}';
     private const ALARM_CALL_NEXXT_MOBILE_MODULE_GUID = '{CCCE18B9-245A-900F-5DCF-CF11527571CE}';
@@ -83,6 +85,7 @@ class AlarmanlageKonfigurator extends IPSModule
 
         //Repositories
         $this->RegisterPropertyString('CommandControlURL', 'https://github.com/ubittner/Ablaufsteuerung');
+        $this->RegisterPropertyString('UpdateDetectorURL', 'https://github.com/ubittner/Aktualisierungsmelder');
         $this->RegisterPropertyString('AlarmCallURL', 'https://github.com/ubittner/Alarmanruf');
         $this->RegisterPropertyString('AlarmLightURL', 'https://github.com/ubittner/Alarmbeleuchtung');
         $this->RegisterPropertyString('AlertingURL', 'https://github.com/ubittner/Alarmierung');
@@ -139,6 +142,7 @@ class AlarmanlageKonfigurator extends IPSModule
     public function AddLibrary(string $LibraryName): void
     {
         $library['CommandControl'] = ['GUID' => self::COMMAND_CONTROL_LIBRARY_GUID, 'moduleName' => 'Ablaufsteuerung', 'URL' => 'CommandControlURL'];
+        $library['UpdateDetector'] = ['GUID' => self::UPDATE_DETECTOR_LIBRARY_GUID, 'moduleName' => 'Aktualisierungsmelder', 'URL' => 'UpdateDetectorURL'];
         $library['AlarmCall'] = ['GUID' => self::ALARM_CALL_LIBRARY_GUID, 'moduleName' => 'Alarmanruf', 'URL' => 'AlarmCallURL'];
         $library['AlarmLight'] = ['GUID' => self::ALARM_LIGHT_LIBRARY_GUID, 'moduleName' => 'Alarmbeleuchtung', 'URL' => 'AlarmLightURL'];
         $library['Alerting'] = ['GUID' => self::ALERTING_LIBRARY_GUID, 'moduleName' => 'Alarmierung', 'URL' => 'AlertingURL'];
@@ -186,6 +190,7 @@ class AlarmanlageKonfigurator extends IPSModule
     public function CreateInstance(string $ModuleGUID, int $CategoryID): void
     {
         $module[self::COMMAND_CONTROL_MODULE_GUID] = ['moduleName' => 'Ablaufsteuerung', 'actionName' => 'CommandControl'];
+        $module[self::UPDATE_DETECTOR_MODULE_GUID] = ['moduleName' => 'Aktualisierungsmelder', 'actionName' => 'UpdateDetector'];
         $module[self::ALARM_CALL_MODULE_GUID] = ['moduleName' => 'Alarmanruf', 'actionName' => 'AlarmCall'];
         $module[self::ALARM_CALL_NEXXT_MOBILE_MODULE_GUID] = ['moduleName' => 'Alarmanruf NeXXt Mobile', 'actionName' => 'AlarmCall'];
         $module[self::ALARM_CALL_VOIP_MODULE_GUID] = ['moduleName' => 'Alarmanruf VoIP', 'actionName' => 'AlarmCall'];

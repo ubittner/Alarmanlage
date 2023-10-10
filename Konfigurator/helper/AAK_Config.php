@@ -62,14 +62,14 @@ trait AAK_Config
     public function ShowLibraries(int $Library): void
     {
         if ($Library == 0) {
-            for ($i = 1; $i <= 17; $i++) {
+            for ($i = 1; $i <= 18; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', false);
                 $this->UpdateFormField('Row' . $i, 'visible', false);
             }
         }
 
         if ($Library > 0 && $Library < 100) {
-            for ($i = 1; $i <= 17; $i++) {
+            for ($i = 1; $i <= 18; $i++) {
                 if ($i == $Library) {
                     $visible = true;
                 } else {
@@ -81,7 +81,7 @@ trait AAK_Config
         }
 
         if ($Library == 100) {
-            for ($i = 1; $i <= 17; $i++) {
+            for ($i = 1; $i <= 18; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', true);
                 $this->UpdateFormField('Row' . $i, 'visible', true);
             }
@@ -179,6 +179,17 @@ trait AAK_Config
                             'type'    => 'ValidationTextBox',
                             'name'    => 'CommandControlURL',
                             'caption' => 'Ablaufsteuerung URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
+                            'name'    => 'UpdateDetectorURL',
+                            'caption' => 'Aktualisierungsmelder URL',
                             'width'   => '600px'
                         ]
                     ]
@@ -392,68 +403,72 @@ trait AAK_Config
                         'value'   => 1
                     ],
                     [
-                        'caption' => 'Alarmanruf',
+                        'caption' => 'Aktualisierungsmelder',
                         'value'   => 2
                     ],
                     [
-                        'caption' => 'Alarmbeleuchtung',
+                        'caption' => 'Alarmanruf',
                         'value'   => 3
                     ],
                     [
-                        'caption' => 'Alarmierung',
+                        'caption' => 'Alarmbeleuchtung',
                         'value'   => 4
                     ],
                     [
-                        'caption' => 'Alarmprotokoll',
+                        'caption' => 'Alarmierung',
                         'value'   => 5
                     ],
                     [
-                        'caption' => 'Alarmsirene',
+                        'caption' => 'Alarmprotokoll',
                         'value'   => 6
                     ],
                     [
-                        'caption' => 'Alarmzone',
+                        'caption' => 'Alarmsirene',
                         'value'   => 7
                     ],
                     [
-                        'caption' => 'Batteriemelder',
+                        'caption' => 'Alarmzone',
                         'value'   => 8
                     ],
                     [
-                        'caption' => 'Benachrichtigung',
+                        'caption' => 'Batteriemelder',
                         'value'   => 9
                     ],
                     [
-                        'caption' => 'Bewegungsmelderstatus',
+                        'caption' => 'Benachrichtigung',
                         'value'   => 10
                     ],
                     [
-                        'caption' => 'Fensterstatus',
+                        'caption' => 'Bewegungsmelderstatus',
                         'value'   => 11
                     ],
                     [
-                        'caption' => 'Fernbedienung',
+                        'caption' => 'Fensterstatus',
                         'value'   => 12
                     ],
                     [
-                        'caption' => 'Mailer',
+                        'caption' => 'Fernbedienung',
                         'value'   => 13
                     ],
                     [
-                        'caption' => 'Statusanzeige',
+                        'caption' => 'Mailer',
                         'value'   => 14
                     ],
                     [
-                        'caption' => 'Wartungsmodus',
+                        'caption' => 'Statusanzeige',
                         'value'   => 15
                     ],
                     [
-                        'caption' => 'Warnmelder',
+                        'caption' => 'Wartungsmodus',
                         'value'   => 16
                     ],
                     [
-                        'caption' => 'Zentralenstatus',
+                        'caption' => 'Warnmelder',
                         'value'   => 17
+                    ],
+                    [
+                        'caption' => 'Zentralenstatus',
+                        'value'   => 18
                     ]
                 ],
                 'onChange' => self::MODULE_PREFIX . '_ShowLibraries($id, $SelectLibrary);',
@@ -543,11 +558,88 @@ trait AAK_Config
                 ]
             ];
 
-        //Alarm call
+        //Update detector
         $form['actions'][] =
             [
                 'type'    => 'Label',
                 'name'    => 'Label2',
+                'caption' => 'Aktualisierungsmelder',
+                'visible' => false
+            ];
+
+        $actionName = 'UpdateDetector';
+        $libraryGUID = self::UPDATE_DETECTOR_LIBRARY_GUID;
+        $moduleGUID = self::UPDATE_DETECTOR_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row2',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Aktualisierungsmelder',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Alarm call
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label3',
                 'caption' => 'Alarmanruf',
                 'visible' => false
             ];
@@ -566,7 +658,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row2',
+                'name'    => 'Row3',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -632,7 +724,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label3',
+                'name'    => 'Label4',
                 'caption' => 'Alarmbeleuchtung',
                 'visible' => false
             ];
@@ -651,7 +743,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row3',
+                'name'    => 'Row4',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -709,7 +801,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label4',
+                'name'    => 'Label5',
                 'caption' => 'Alarmierung',
                 'visible' => false
             ];
@@ -728,7 +820,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row4',
+                'name'    => 'Row5',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -786,7 +878,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label5',
+                'name'    => 'Label6',
                 'caption' => 'Alarmprotokoll',
                 'visible' => false
             ];
@@ -805,7 +897,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row5',
+                'name'    => 'Row6',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -863,7 +955,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label6',
+                'name'    => 'Label7',
                 'caption' => 'Alarmsirene',
                 'visible' => false
             ];
@@ -882,7 +974,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row6',
+                'name'    => 'Row7',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -948,7 +1040,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label7',
+                'name'    => 'Label8',
                 'caption' => 'Alarmzone',
                 'visible' => false
             ];
@@ -967,7 +1059,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row7',
+                'name'    => 'Row8',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1029,7 +1121,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label8',
+                'name'    => 'Label9',
                 'caption' => 'Batteriemelder',
                 'visible' => false
             ];
@@ -1048,7 +1140,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row8',
+                'name'    => 'Row9',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1106,7 +1198,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label9',
+                'name'    => 'Label10',
                 'caption' => 'Benachrichtigung',
                 'visible' => false
             ];
@@ -1125,7 +1217,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row9',
+                'name'    => 'Row10',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1183,7 +1275,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label10',
+                'name'    => 'Label11',
                 'caption' => 'Bewegungsmelderstatus',
                 'visible' => false
             ];
@@ -1202,7 +1294,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row10',
+                'name'    => 'Row11',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1260,7 +1352,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label11',
+                'name'    => 'Label12',
                 'caption' => 'Fensterstatus',
                 'visible' => false
             ];
@@ -1279,7 +1371,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row11',
+                'name'    => 'Row12',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1337,7 +1429,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label12',
+                'name'    => 'Label13',
                 'caption' => 'Fernbedienung',
                 'visible' => false
             ];
@@ -1356,7 +1448,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row12',
+                'name'    => 'Row13',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1414,7 +1506,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label13',
+                'name'    => 'Label14',
                 'caption' => 'Mailer',
                 'visible' => false
             ];
@@ -1433,7 +1525,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row13',
+                'name'    => 'Row14',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1491,7 +1583,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label14',
+                'name'    => 'Label15',
                 'caption' => 'Statusanzeige',
                 'visible' => false
             ];
@@ -1510,7 +1602,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row14',
+                'name'    => 'Row15',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1576,7 +1668,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label15',
+                'name'    => 'Label16',
                 'caption' => 'Wartungsmodus',
                 'visible' => false
             ];
@@ -1595,7 +1687,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row15',
+                'name'    => 'Row16',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1653,7 +1745,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label16',
+                'name'    => 'Label17',
                 'caption' => 'Warnmelder',
                 'visible' => false
             ];
@@ -1672,7 +1764,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row16',
+                'name'    => 'Row17',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1730,7 +1822,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label17',
+                'name'    => 'Label18',
                 'caption' => 'Zentralenstatus',
                 'visible' => false
             ];
@@ -1749,7 +1841,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'RowLayout',
-                'name'    => 'Row17',
+                'name'    => 'Row18',
                 'visible' => false,
                 'items'   => [
                     //Add library
@@ -1840,35 +1932,6 @@ trait AAK_Config
                     ]
                 ]
             ];
-
-        ########## Status
-        /*
-        $form['status'][] = [
-            'code'    => 101,
-            'icon'    => 'active',
-            'caption' => $module['ModuleName'] . ' wird erstellt',
-        ];
-        $form['status'][] = [
-            'code'    => 102,
-            'icon'    => 'active',
-            'caption' => $module['ModuleName'] . ' ist aktiv',
-        ];
-        $form['status'][] = [
-            'code'    => 103,
-            'icon'    => 'active',
-            'caption' => $module['ModuleName'] . ' wird gelöscht',
-        ];
-        $form['status'][] = [
-            'code'    => 104,
-            'icon'    => 'inactive',
-            'caption' => $module['ModuleName'] . ' ist inaktiv',
-        ];
-        $form['status'][] = [
-            'code'    => 200,
-            'icon'    => 'inactive',
-            'caption' => 'Es ist Fehler aufgetreten, weitere Informationen unter Meldungen, im Log oder Debug!',
-        ];
-         */
 
         return json_encode($form);
     }

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @project       Alarmanlage/Alarmanlagenkonfigurator
+ * @project       Alarmanlage/Alarmanlagenkonfigurator/helper/
  * @file          AAK_Config.php
  * @author        Ulrich Bittner
- * @copyright     2022 Ulrich Bittner
+ * @copyright     2023 Ulrich Bittner
  * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
  */
 
@@ -54,7 +54,7 @@ trait AAK_Config
      */
     public function ExpandExpansionPanels(bool $State): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $this->UpdateFormField('Panel' . $i, 'expanded', $State);
         }
     }
@@ -62,14 +62,14 @@ trait AAK_Config
     public function ShowLibraries(int $Library): void
     {
         if ($Library == 0) {
-            for ($i = 1; $i <= 18; $i++) {
+            for ($i = 1; $i <= 19; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', false);
                 $this->UpdateFormField('Row' . $i, 'visible', false);
             }
         }
 
         if ($Library > 0 && $Library < 100) {
-            for ($i = 1; $i <= 18; $i++) {
+            for ($i = 1; $i <= 19; $i++) {
                 if ($i == $Library) {
                     $visible = true;
                 } else {
@@ -81,7 +81,7 @@ trait AAK_Config
         }
 
         if ($Library == 100) {
-            for ($i = 1; $i <= 18; $i++) {
+            for ($i = 1; $i <= 19; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', true);
                 $this->UpdateFormField('Row' . $i, 'visible', true);
             }
@@ -342,6 +342,17 @@ trait AAK_Config
                     'items' => [
                         [
                             'type'    => 'ValidationTextBox',
+                            'name'    => 'StatusListURL',
+                            'caption' => 'Statusliste URL',
+                            'width'   => '600px'
+                        ]
+                    ]
+                ],
+                [
+                    'type'  => 'RowLayout',
+                    'items' => [
+                        [
+                            'type'    => 'ValidationTextBox',
                             'name'    => 'MaintenanceModeURL',
                             'caption' => 'Wartungsmodus URL',
                             'width'   => '600px'
@@ -459,16 +470,20 @@ trait AAK_Config
                         'value'   => 15
                     ],
                     [
-                        'caption' => 'Wartungsmodus',
+                        'caption' => 'Statusliste',
                         'value'   => 16
                     ],
                     [
-                        'caption' => 'Warnmelder',
+                        'caption' => 'Wartungsmodus',
                         'value'   => 17
                     ],
                     [
-                        'caption' => 'Zentralenstatus',
+                        'caption' => 'Warnmelder',
                         'value'   => 18
+                    ],
+                    [
+                        'caption' => 'Zentralenstatus',
+                        'value'   => 19
                     ]
                 ],
                 'onChange' => self::MODULE_PREFIX . '_ShowLibraries($id, $SelectLibrary);',
@@ -520,6 +535,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -543,6 +559,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -597,6 +614,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -620,6 +638,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -674,6 +693,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -705,6 +725,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -759,6 +780,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -782,6 +804,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -836,6 +859,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -859,6 +883,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -913,6 +938,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -936,6 +962,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -990,6 +1017,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1021,6 +1049,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1075,6 +1104,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1102,6 +1132,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1156,6 +1187,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1179,6 +1211,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1233,6 +1266,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1256,6 +1290,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1310,6 +1345,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1333,6 +1369,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1387,6 +1424,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1410,6 +1448,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1464,6 +1503,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1487,6 +1527,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1541,6 +1582,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1564,6 +1606,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1618,6 +1661,7 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1649,6 +1693,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1664,18 +1709,18 @@ trait AAK_Config
                 ]
             ];
 
-        //Maintenance mode
+        //Status list
         $form['actions'][] =
             [
                 'type'    => 'Label',
                 'name'    => 'Label16',
-                'caption' => 'Wartungsmodus',
+                'caption' => 'Statusliste',
                 'visible' => false
             ];
 
-        $actionName = 'MaintenanceMode';
-        $libraryGUID = self::MAINTENANCE_MODE_LIBRARY_GUID;
-        $moduleGUID = self::MAINTENANCE_MODE_MODULE_GUID;
+        $actionName = 'StatusList';
+        $libraryGUID = self::STATUS_LIST_LIBRARY_GUID;
+        $moduleGUID = self::STATUS_LIST_MODULE_GUID;
 
         $enabled = true;
         $visible = false;
@@ -1703,10 +1748,11 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
-                                'caption' => 'Wartungsmodus',
+                                'caption' => 'Statusliste',
                                 'value'   => $moduleGUID
                             ]
                         ],
@@ -1726,6 +1772,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1741,18 +1788,18 @@ trait AAK_Config
                 ]
             ];
 
-        //Warning indicator
+        //Maintenance mode
         $form['actions'][] =
             [
                 'type'    => 'Label',
                 'name'    => 'Label17',
-                'caption' => 'Warnmelder',
+                'caption' => 'Wartungsmodus',
                 'visible' => false
             ];
 
-        $actionName = 'WarningIndicator';
-        $libraryGUID = self::WARNING_INDICATOR_LIBRARY_GUID;
-        $moduleGUID = self::WARNING_INDICATOR_MODULE_GUID;
+        $actionName = 'MaintenanceMode';
+        $libraryGUID = self::MAINTENANCE_MODE_LIBRARY_GUID;
+        $moduleGUID = self::MAINTENANCE_MODE_MODULE_GUID;
 
         $enabled = true;
         $visible = false;
@@ -1780,10 +1827,11 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
-                                'caption' => 'Warnmelder',
+                                'caption' => 'Wartungsmodus',
                                 'value'   => $moduleGUID
                             ]
                         ],
@@ -1803,6 +1851,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
@@ -1818,18 +1867,18 @@ trait AAK_Config
                 ]
             ];
 
-        //Central status
+        //Warning indicator
         $form['actions'][] =
             [
                 'type'    => 'Label',
                 'name'    => 'Label18',
-                'caption' => 'Zentralenstatus',
+                'caption' => 'Warnmelder',
                 'visible' => false
             ];
 
-        $actionName = 'CentralStatus';
-        $libraryGUID = self::CENTRAL_STATUS_LIBRARY_GUID;
-        $moduleGUID = self::CENTRAL_STATUS_MODULE_GUID;
+        $actionName = 'WarningIndicator';
+        $libraryGUID = self::WARNING_INDICATOR_LIBRARY_GUID;
+        $moduleGUID = self::WARNING_INDICATOR_MODULE_GUID;
 
         $enabled = true;
         $visible = false;
@@ -1857,6 +1906,86 @@ trait AAK_Config
                         'type'    => 'Select',
                         'name'    => 'Select' . $actionName . 'Module',
                         'caption' => 'Modul',
+                        'width'   => '400px',
+                        'visible' => $visible,
+                        'options' => [
+                            [
+                                'caption' => 'Warnmelder',
+                                'value'   => $moduleGUID
+                            ]
+                        ],
+                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
+                        'value'    => $moduleGUID
+                    ],
+                    //Create instance
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Create' . $actionName . 'InstanceButton',
+                        'caption' => 'Neue Instanz erstellen',
+                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
+                        'visible' => $visible
+                    ],
+                    //Select instance
+                    [
+                        'type'     => 'SelectModule',
+                        'name'     => 'Select' . $actionName . 'Instance',
+                        'caption'  => 'Instanz',
+                        'width'    => '600px',
+                        'moduleID' => $moduleGUID,
+                        'visible'  => $visible,
+                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
+                    ],
+                    //Configure instance
+                    [
+                        'type'     => 'OpenObjectButton',
+                        'caption'  => 'Konfigurieren',
+                        'name'     => 'Configure' . $actionName . 'InstanceButton',
+                        'visible'  => false,
+                        'objectID' => 0
+                    ]
+                ]
+            ];
+
+        //Central status
+        $form['actions'][] =
+            [
+                'type'    => 'Label',
+                'name'    => 'Label19',
+                'caption' => 'Zentralenstatus',
+                'visible' => false
+            ];
+
+        $actionName = 'CentralStatus';
+        $libraryGUID = self::CENTRAL_STATUS_LIBRARY_GUID;
+        $moduleGUID = self::CENTRAL_STATUS_MODULE_GUID;
+
+        $enabled = true;
+        $visible = false;
+        if (@IPS_LibraryExists($libraryGUID)) {
+            $enabled = false;
+            $visible = true;
+        }
+
+        $form['actions'][] =
+            [
+                'type'    => 'RowLayout',
+                'name'    => 'Row19',
+                'visible' => false,
+                'items'   => [
+                    //Add library
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'Add' . $actionName . 'LibraryButton',
+                        'caption' => 'Bibliothek hinzufügen',
+                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
+                        'enabled' => $enabled
+                    ],
+                    //Select module
+                    [
+                        'type'    => 'Select',
+                        'name'    => 'Select' . $actionName . 'Module',
+                        'caption' => 'Modul',
+                        'width'   => '400px',
                         'visible' => $visible,
                         'options' => [
                             [
@@ -1880,6 +2009,7 @@ trait AAK_Config
                         'type'     => 'SelectModule',
                         'name'     => 'Select' . $actionName . 'Instance',
                         'caption'  => 'Instanz',
+                        'width'    => '600px',
                         'moduleID' => $moduleGUID,
                         'visible'  => $visible,
                         'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'

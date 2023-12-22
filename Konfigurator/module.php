@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @project       Alarmanlage/Alarmanlagenkonfigurator
+ * @project       Alarmanlage/Alarmanlagenkonfigurator/
  * @file          module.php
  * @author        Ulrich Bittner
- * @copyright     2022 Ulrich Bittner
+ * @copyright     2023 Ulrich Bittner
  * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
  */
 
@@ -66,6 +66,8 @@ class AlarmanlageKonfigurator extends IPSModule
     private const STATUS_DISPLAY_MODULE_GUID = '{A059E898-5F10-F396-1886-3FB86DC92DD3}';
     private const STATUS_DISPLAY_HOMEMATIC_MODULE_GUID = '{17C9B00D-3C66-2B99-7F83-604DA32C91E6}';
     private const STATUS_DISPLAY_HOMEMATICIP_MODULE_GUID = '{B811C5C6-4DB9-2E1E-D8F8-1532D1A2CFCD}';
+    private const STATUS_LIST_LIBRARY_GUID = '{7970AD78-5D4E-9DF8-6B05-089B56F4D608}';
+    private const STATUS_LIST_MODULE_GUID = '{FCC297AA-0414-29FD-DD5E-3A48514D7D4E}';
     private const MAINTENANCE_MODE_LIBRARY_GUID = '{A2FDCE6D-C181-9B29-638D-FEB803E5DEA0}';
     private const MAINTENANCE_MODE_MODULE_GUID = '{EA65A9F4-68CA-7891-E4B7-34E24B7A4745}';
     private const WARNING_INDICATOR_LIBRARY_GUID = '{70D8F340-4128-EEC8-3FCE-5C3FA449B64F}';
@@ -99,6 +101,7 @@ class AlarmanlageKonfigurator extends IPSModule
         $this->RegisterPropertyString('RemoteControlURL', 'https://github.com/ubittner/Fernbedienung');
         $this->RegisterPropertyString('MailerURL', 'https://github.com/ubittner/Mailer');
         $this->RegisterPropertyString('StatusDisplayURL', 'https://github.com/ubittner/Statusanzeige');
+        $this->RegisterPropertyString('StatusListURL', 'https://github.com/ubittner/Statusliste');
         $this->RegisterPropertyString('MaintenanceModeURL', 'https://github.com/ubittner/Wartungsmodus');
         $this->RegisterPropertyString('WarningIndicatorURL', 'https://github.com/ubittner/Warnmelder');
         $this->RegisterPropertyString('CentralStatusURL', 'https://github.com/ubittner/Zentralenstatus');
@@ -136,6 +139,9 @@ class AlarmanlageKonfigurator extends IPSModule
 
     public function UpdateField(string $Name, string $Parameter, string $Value): void
     {
+        if ($Value == 0) {
+            return;
+        }
         $this->UpdateFormField($Name, $Parameter, $Value);
     }
 
@@ -156,6 +162,7 @@ class AlarmanlageKonfigurator extends IPSModule
         $library['RemoteControl'] = ['GUID' => self::REMOTE_CONTROL_LIBRARY_GUID, 'moduleName' => 'Fernbedienung', 'URL' => 'RemoteControlURL'];
         $library['Mailer'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Mailer', 'URL' => 'MailerURL'];
         $library['StatusDisplay'] = ['GUID' => self::STATUS_DISPLAY_LIBRARY_GUID, 'moduleName' => 'Statusanzeige', 'URL' => 'StatusDisplayURL'];
+        $library['StatusList'] = ['GUID' => self::STATUS_LIST_LIBRARY_GUID, 'moduleName' => 'Statusliste', 'URL' => 'StatusListURL'];
         $library['MaintenanceMode'] = ['GUID' => self::MAINTENANCE_MODE_LIBRARY_GUID, 'moduleName' => 'Wartungsmodus', 'URL' => 'MaintenanceModeURL'];
         $library['WarningIndicator'] = ['GUID' => self::WARNING_INDICATOR_LIBRARY_GUID, 'moduleName' => 'Warnmelder', 'URL' => 'WarningIndicatorURL'];
         $library['CentralStatus'] = ['GUID' => self::CENTRAL_STATUS_LIBRARY_GUID, 'moduleName' => 'Zentralenstatus', 'URL' => 'CentralStatusURL'];
@@ -211,6 +218,7 @@ class AlarmanlageKonfigurator extends IPSModule
         $module[self::STATUS_DISPLAY_MODULE_GUID] = ['moduleName' => 'Statusanzeige', 'actionName' => 'StatusDisplay'];
         $module[self::STATUS_DISPLAY_HOMEMATIC_MODULE_GUID] = ['moduleName' => 'Statusanzeige Homematic', 'actionName' => 'StatusDisplay'];
         $module[self::STATUS_DISPLAY_HOMEMATICIP_MODULE_GUID] = ['moduleName' => 'Statusanzeige Homematic IP', 'actionName' => 'StatusDisplay'];
+        $module[self::STATUS_LIST_MODULE_GUID] = ['moduleName' => 'Statusliste', 'actionName' => 'StatusList'];
         $module[self::MAINTENANCE_MODE_MODULE_GUID] = ['moduleName' => 'Wartungsmodus', 'actionName' => 'MaintenanceMode'];
         $module[self::WARNING_INDICATOR_MODULE_GUID] = ['moduleName' => 'Warnmelder', 'actionName' => 'WarningIndicator'];
         $module[self::CENTRAL_STATUS_MODULE_GUID] = ['moduleName' => 'Zentralenstatus', 'actionName' => 'CentralStatus'];

@@ -180,13 +180,13 @@ trait AAK_ConfigurationForm
                             'name'    => 'CommandControlURL',
                             'caption' => 'Ablaufsteuerung URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'CommandControlButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $CommandControlURL;'
                         ]
-                    ],
-                    [
-                        'type'    => 'Button',
-                        'name'    => 'CommandControlButton',
-                        'caption' => 'GitHub',
-                        'onClick' => 'echo $CommandControlURL;'
                     ]
                 ],
                 [

@@ -20,7 +20,7 @@ include_once __DIR__ . '/helper/AAK_autoload.php';
 class AlarmanlageKonfigurator extends IPSModule
 {
     //Helper
-    use AAK_Config;
+    use AAK_ConfigurationForm;
 
     //Constants
     private const LIBRARY_GUID = '{CEDAB842-9168-AC25-2831-BA23E069A6A3}';
@@ -54,10 +54,6 @@ class AlarmanlageKonfigurator extends IPSModule
     private const BATTERY_DETECTOR_MODULE_GUID = '{3C878C9D-63E0-767D-494C-35AC950EA76D}';
     private const NOTIFICATION_LIBRARY_GUID = '{76D34084-7695-02EF-DAA8-82041E08AB72}';
     private const NOTIFICATION_MODULE_GUID = '{BDAB70AA-B45D-4CB4-3D65-509CFF0969F9}';
-    private const MOTION_DETECTOR_STATUS_LIBRARY_GUID = '{8F305D5E-2380-3326-073D-0EAC7A47184C}';
-    private const MOTION_DETECTOR_STATUS_MODULE_GUID = '{F36EE238-6594-3B70-F191-0E361DB0596C}';
-    private const DOOR_WINDOW_STATUS_LIBRARY_GUID = '{72BAFA29-C34E-43F0-D656-BC6B72D83230}';
-    private const DOOR_WINDOW_STATUS_MODULE_GUID = '{BF9B17E3-0F5E-208E-7F6F-F3EECC9752A0}';
     private const REMOTE_CONTROL_LIBRARY_GUID = '{B98CAD42-EF00-5277-BB1C-0760EA2AD0C4}';
     private const REMOTE_CONTROL_MODULE_GUID = '{73F6BEB3-115F-4018-A1D3-C6C16B939986}';
     private const MAILER_LIBRARY_GUID = '{9B229E71-4D0F-E386-330F-1AC86B01BE18}';
@@ -96,8 +92,6 @@ class AlarmanlageKonfigurator extends IPSModule
         $this->RegisterPropertyString('AlarmZoneURL', 'https://github.com/ubittner/Alarmzone');
         $this->RegisterPropertyString('BatteryDetectorURL', 'https://github.com/ubittner/Batteriemelder');
         $this->RegisterPropertyString('NotificationURL', 'https://github.com/ubittner/Benachrichtigung');
-        $this->RegisterPropertyString('MotionDetectorStatusURL', 'https://github.com/ubittner/Bewegungsmelderstatus');
-        $this->RegisterPropertyString('DoorWindowStatusURL', 'https://github.com/ubittner/Fensterstatus');
         $this->RegisterPropertyString('RemoteControlURL', 'https://github.com/ubittner/Fernbedienung');
         $this->RegisterPropertyString('MailerURL', 'https://github.com/ubittner/Mailer');
         $this->RegisterPropertyString('StatusDisplayURL', 'https://github.com/ubittner/Statusanzeige');
@@ -157,8 +151,6 @@ class AlarmanlageKonfigurator extends IPSModule
         $library['AlarmZone'] = ['GUID' => self::ALARM_ZONE_LIBRARY_GUID, 'moduleName' => 'Alarmzone', 'URL' => 'AlarmZoneURL'];
         $library['BatteryDetector'] = ['GUID' => self::BATTERY_DETECTOR_LIBRARY_GUID, 'moduleName' => 'Batteriemelder', 'URL' => 'BatteryDetectorURL'];
         $library['Notification'] = ['GUID' => self::NOTIFICATION_LIBRARY_GUID, 'moduleName' => 'Benachrichtigung', 'URL' => 'NotificationURL'];
-        $library['MotionDetectorStatus'] = ['GUID' => self::MOTION_DETECTOR_STATUS_LIBRARY_GUID, 'moduleName' => 'Bewegungsmelderstatus', 'URL' => 'MotionDetectorStatusURL'];
-        $library['DoorWindowStatus'] = ['GUID' => self::DOOR_WINDOW_STATUS_LIBRARY_GUID, 'moduleName' => 'Fensterstatus', 'URL' => 'DoorWindowStatusURL'];
         $library['RemoteControl'] = ['GUID' => self::REMOTE_CONTROL_LIBRARY_GUID, 'moduleName' => 'Fernbedienung', 'URL' => 'RemoteControlURL'];
         $library['Mailer'] = ['GUID' => self::MAILER_LIBRARY_GUID, 'moduleName' => 'Mailer', 'URL' => 'MailerURL'];
         $library['StatusDisplay'] = ['GUID' => self::STATUS_DISPLAY_LIBRARY_GUID, 'moduleName' => 'Statusanzeige', 'URL' => 'StatusDisplayURL'];
@@ -211,8 +203,6 @@ class AlarmanlageKonfigurator extends IPSModule
         $module[self::ALARM_ZONE_CONTROL_MODULE_GUID] = ['moduleName' => 'Alarmzone', 'actionName' => 'AlarmZone'];
         $module[self::BATTERY_DETECTOR_MODULE_GUID] = ['moduleName' => 'Batteriemelder', 'actionName' => 'BatteryDetector'];
         $module[self::NOTIFICATION_MODULE_GUID] = ['moduleName' => 'Benachrichtigung', 'actionName' => 'Notification'];
-        $module[self::MOTION_DETECTOR_STATUS_MODULE_GUID] = ['moduleName' => 'Bewegungsmelderstatus', 'actionName' => 'MotionDetectorStatus'];
-        $module[self::DOOR_WINDOW_STATUS_MODULE_GUID] = ['moduleName' => 'Fensterstatus', 'actionName' => 'DoorWindowStatus'];
         $module[self::REMOTE_CONTROL_MODULE_GUID] = ['moduleName' => 'Fernbedienung', 'actionName' => 'RemoteControl'];
         $module[self::MAILER_MODULE_GUID] = ['moduleName' => 'Mailer', 'actionName' => 'Mailer'];
         $module[self::STATUS_DISPLAY_MODULE_GUID] = ['moduleName' => 'Statusanzeige', 'actionName' => 'StatusDisplay'];

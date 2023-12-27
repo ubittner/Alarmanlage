@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-trait AAK_Config
+trait AAK_ConfigurationForm
 {
     /**
      * Reloads the configuration form.
@@ -62,14 +62,14 @@ trait AAK_Config
     public function ShowLibraries(int $Library): void
     {
         if ($Library == 0) {
-            for ($i = 1; $i <= 19; $i++) {
+            for ($i = 1; $i <= 17; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', false);
                 $this->UpdateFormField('Row' . $i, 'visible', false);
             }
         }
 
         if ($Library > 0 && $Library < 100) {
-            for ($i = 1; $i <= 19; $i++) {
+            for ($i = 1; $i <= 17; $i++) {
                 if ($i == $Library) {
                     $visible = true;
                 } else {
@@ -81,7 +81,7 @@ trait AAK_Config
         }
 
         if ($Library == 100) {
-            for ($i = 1; $i <= 19; $i++) {
+            for ($i = 1; $i <= 17; $i++) {
                 $this->UpdateFormField('Label' . $i, 'visible', true);
                 $this->UpdateFormField('Row' . $i, 'visible', true);
             }
@@ -287,28 +287,6 @@ trait AAK_Config
                     'items' => [
                         [
                             'type'    => 'ValidationTextBox',
-                            'name'    => 'MotionDetectorStatusURL',
-                            'caption' => 'Bewegungsmelderstatus URL',
-                            'width'   => '600px'
-                        ]
-                    ]
-                ],
-                [
-                    'type'  => 'RowLayout',
-                    'items' => [
-                        [
-                            'type'    => 'ValidationTextBox',
-                            'name'    => 'DoorWindowStatusURL',
-                            'caption' => 'Fensterstatus URL',
-                            'width'   => '600px'
-                        ]
-                    ]
-                ],
-                [
-                    'type'  => 'RowLayout',
-                    'items' => [
-                        [
-                            'type'    => 'ValidationTextBox',
                             'name'    => 'RemoteControlURL',
                             'caption' => 'Fernbedienung URL',
                             'width'   => '600px'
@@ -450,40 +428,32 @@ trait AAK_Config
                         'value'   => 10
                     ],
                     [
-                        'caption' => 'Bewegungsmelderstatus',
+                        'caption' => 'Fernbedienung',
                         'value'   => 11
                     ],
                     [
-                        'caption' => 'Fensterstatus',
+                        'caption' => 'Mailer',
                         'value'   => 12
                     ],
                     [
-                        'caption' => 'Fernbedienung',
+                        'caption' => 'Statusanzeige',
                         'value'   => 13
                     ],
                     [
-                        'caption' => 'Mailer',
+                        'caption' => 'Statusliste',
                         'value'   => 14
                     ],
                     [
-                        'caption' => 'Statusanzeige',
+                        'caption' => 'Wartungsmodus',
                         'value'   => 15
                     ],
                     [
-                        'caption' => 'Statusliste',
+                        'caption' => 'Warnmelder',
                         'value'   => 16
                     ],
                     [
-                        'caption' => 'Wartungsmodus',
-                        'value'   => 17
-                    ],
-                    [
-                        'caption' => 'Warnmelder',
-                        'value'   => 18
-                    ],
-                    [
                         'caption' => 'Zentralenstatus',
-                        'value'   => 19
+                        'value'   => 17
                     ]
                 ],
                 'onChange' => self::MODULE_PREFIX . '_ShowLibraries($id, $SelectLibrary);',
@@ -1306,169 +1276,11 @@ trait AAK_Config
                 ]
             ];
 
-        //Motion detector status
-        $form['actions'][] =
-            [
-                'type'    => 'Label',
-                'name'    => 'Label11',
-                'caption' => 'Bewegungsmelderstatus',
-                'visible' => false
-            ];
-
-        $actionName = 'MotionDetectorStatus';
-        $libraryGUID = self::MOTION_DETECTOR_STATUS_LIBRARY_GUID;
-        $moduleGUID = self::MOTION_DETECTOR_STATUS_MODULE_GUID;
-
-        $enabled = true;
-        $visible = false;
-        if (@IPS_LibraryExists($libraryGUID)) {
-            $enabled = false;
-            $visible = true;
-        }
-
-        $form['actions'][] =
-            [
-                'type'    => 'RowLayout',
-                'name'    => 'Row11',
-                'visible' => false,
-                'items'   => [
-                    //Add library
-                    [
-                        'type'    => 'Button',
-                        'name'    => 'Add' . $actionName . 'LibraryButton',
-                        'caption' => 'Bibliothek hinzufügen',
-                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
-                        'enabled' => $enabled
-                    ],
-                    //Select module
-                    [
-                        'type'    => 'Select',
-                        'name'    => 'Select' . $actionName . 'Module',
-                        'caption' => 'Modul',
-                        'width'   => '400px',
-                        'visible' => $visible,
-                        'options' => [
-                            [
-                                'caption' => 'Bewegungsmelderstatus',
-                                'value'   => $moduleGUID
-                            ]
-                        ],
-                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
-                        'value'    => $moduleGUID
-                    ],
-                    //Create instance
-                    [
-                        'type'    => 'Button',
-                        'name'    => 'Create' . $actionName . 'InstanceButton',
-                        'caption' => 'Neue Instanz erstellen',
-                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
-                        'visible' => $visible
-                    ],
-                    //Select instance
-                    [
-                        'type'     => 'SelectModule',
-                        'name'     => 'Select' . $actionName . 'Instance',
-                        'caption'  => 'Instanz',
-                        'width'    => '600px',
-                        'moduleID' => $moduleGUID,
-                        'visible'  => $visible,
-                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
-                    ],
-                    //Configure instance
-                    [
-                        'type'     => 'OpenObjectButton',
-                        'caption'  => 'Konfigurieren',
-                        'name'     => 'Configure' . $actionName . 'InstanceButton',
-                        'visible'  => false,
-                        'objectID' => 0
-                    ]
-                ]
-            ];
-
-        //Door window status
-        $form['actions'][] =
-            [
-                'type'    => 'Label',
-                'name'    => 'Label12',
-                'caption' => 'Fensterstatus',
-                'visible' => false
-            ];
-
-        $actionName = 'DoorWindowStatus';
-        $libraryGUID = self::DOOR_WINDOW_STATUS_LIBRARY_GUID;
-        $moduleGUID = self::DOOR_WINDOW_STATUS_MODULE_GUID;
-
-        $enabled = true;
-        $visible = false;
-        if (@IPS_LibraryExists($libraryGUID)) {
-            $enabled = false;
-            $visible = true;
-        }
-
-        $form['actions'][] =
-            [
-                'type'    => 'RowLayout',
-                'name'    => 'Row12',
-                'visible' => false,
-                'items'   => [
-                    //Add library
-                    [
-                        'type'    => 'Button',
-                        'name'    => 'Add' . $actionName . 'LibraryButton',
-                        'caption' => 'Bibliothek hinzufügen',
-                        'onClick' => self::MODULE_PREFIX . '_AddLibrary($id, "' . $actionName . '");',
-                        'enabled' => $enabled
-                    ],
-                    //Select module
-                    [
-                        'type'    => 'Select',
-                        'name'    => 'Select' . $actionName . 'Module',
-                        'caption' => 'Modul',
-                        'width'   => '400px',
-                        'visible' => $visible,
-                        'options' => [
-                            [
-                                'caption' => 'Fensterstatus',
-                                'value'   => $moduleGUID
-                            ]
-                        ],
-                        'onChange' => self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "moduleID", $Select' . $actionName . 'Module);' . self::MODULE_PREFIX . '_UpdateField($id, "Select' . $actionName . 'Instance", "value", 0);' . self::MODULE_PREFIX . '_UpdateField($id, "Configure' . $actionName . 'InstanceButton", "visible", false);',
-                        'value'    => $moduleGUID
-                    ],
-                    //Create instance
-                    [
-                        'type'    => 'Button',
-                        'name'    => 'Create' . $actionName . 'InstanceButton',
-                        'caption' => 'Neue Instanz erstellen',
-                        'onClick' => self::MODULE_PREFIX . '_CreateInstance($id, $Select' . $actionName . 'Module, $CategoryID);',
-                        'visible' => $visible
-                    ],
-                    //Select instance
-                    [
-                        'type'     => 'SelectModule',
-                        'name'     => 'Select' . $actionName . 'Instance',
-                        'caption'  => 'Instanz',
-                        'width'    => '600px',
-                        'moduleID' => $moduleGUID,
-                        'visible'  => $visible,
-                        'onChange' => self::MODULE_PREFIX . '_ModifyButton($id, "Configure' . $actionName . 'InstanceButton", "ID " . $Select' . $actionName . 'Instance . " konfigurieren", $Select' . $actionName . 'Instance);'
-                    ],
-                    //Configure instance
-                    [
-                        'type'     => 'OpenObjectButton',
-                        'caption'  => 'Konfigurieren',
-                        'name'     => 'Configure' . $actionName . 'InstanceButton',
-                        'visible'  => false,
-                        'objectID' => 0
-                    ]
-                ]
-            ];
-
         //Remote control
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label13',
+                'name'    => 'Label11',
                 'caption' => 'Fernbedienung',
                 'visible' => false
             ];
@@ -1547,7 +1359,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label14',
+                'name'    => 'Label12',
                 'caption' => 'Mailer',
                 'visible' => false
             ];
@@ -1626,7 +1438,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label15',
+                'name'    => 'Label13',
                 'caption' => 'Statusanzeige',
                 'visible' => false
             ];
@@ -1713,7 +1525,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label16',
+                'name'    => 'Label14',
                 'caption' => 'Statusliste',
                 'visible' => false
             ];
@@ -1792,7 +1604,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label17',
+                'name'    => 'Label15',
                 'caption' => 'Wartungsmodus',
                 'visible' => false
             ];
@@ -1871,7 +1683,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label18',
+                'name'    => 'Label16',
                 'caption' => 'Warnmelder',
                 'visible' => false
             ];
@@ -1950,7 +1762,7 @@ trait AAK_Config
         $form['actions'][] =
             [
                 'type'    => 'Label',
-                'name'    => 'Label19',
+                'name'    => 'Label17',
                 'caption' => 'Zentralenstatus',
                 'visible' => false
             ];

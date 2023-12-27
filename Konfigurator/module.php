@@ -8,9 +8,8 @@
  * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
  */
 
-/** @noinspection PhpExpressionResultUnusedInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
-/** @noinspection PhpUndefinedFunctionInspection */
+/** @noinspection SpellCheckingInspection */
 /** @noinspection PhpUnused */
 
 declare(strict_types=1);

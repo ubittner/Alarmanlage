@@ -8,7 +8,7 @@
  * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
  */
 
-/** @noinspection PhpUnused */
+/** @noinspection SpellCheckingInspection */
 
 declare(strict_types=1);
 
@@ -181,6 +181,12 @@ trait AAK_ConfigurationForm
                             'caption' => 'Ablaufsteuerung URL',
                             'width'   => '600px'
                         ]
+                    ],
+                    [
+                        'type'    => 'Button',
+                        'name'    => 'CommandControlButton',
+                        'caption' => 'GitHub',
+                        'onClick' => 'echo $CommandControlURL;'
                     ]
                 ],
                 [
@@ -191,6 +197,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'UpdateDetectorURL',
                             'caption' => 'Aktualisierungsmelder URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'UpdateDetectorButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $UpdateDetectorURL;'
                         ]
                     ]
                 ],
@@ -202,6 +214,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlarmCallURL',
                             'caption' => 'Alarmanruf URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlarmCallButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlarmCallURL;'
                         ]
                     ]
                 ],
@@ -213,6 +231,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlarmLightURL',
                             'caption' => 'Alarmbeleuchtung URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlarmLightButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlarmLightURL;'
                         ]
                     ]
                 ],
@@ -224,6 +248,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlertingURL',
                             'caption' => 'Alarmierung URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlertingButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlertingURL;'
                         ]
                     ]
                 ],
@@ -235,6 +265,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlarmProtocolURL',
                             'caption' => 'Alarmprotokoll URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlarmProtocolButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlarmProtocolURL;'
                         ]
                     ]
                 ],
@@ -246,6 +282,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlarmSirenURL',
                             'caption' => 'Alarmsirene URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlarmSirenButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlarmSirenURL;'
                         ]
                     ]
                 ],
@@ -257,6 +299,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'AlarmZoneURL',
                             'caption' => 'Alarmzone URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'AlarmZoneButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $AlarmZoneURL;'
                         ]
                     ]
                 ],
@@ -268,6 +316,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'BatteryDetectorURL',
                             'caption' => 'Batteriemelder URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'BatteryDetectorButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $BatteryDetectorURL;'
                         ]
                     ]
                 ],
@@ -279,6 +333,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'NotificationURL',
                             'caption' => 'Benachrichtigung URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'NotificationButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $NotificationURL;'
                         ]
                     ]
                 ],
@@ -290,6 +350,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'RemoteControlURL',
                             'caption' => 'Fernbedienung URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'RemoteControlButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $RemoteControlURL;'
                         ]
                     ]
                 ],
@@ -301,6 +367,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'MailerURL',
                             'caption' => 'Mailer URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'MailerButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $MailerURL;'
                         ]
                     ]
                 ],
@@ -312,6 +384,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'StatusDisplayURL',
                             'caption' => 'Statusanzeige URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'StatusDisplayButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $StatusDisplayURL;'
                         ]
                     ]
                 ],
@@ -323,6 +401,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'StatusListURL',
                             'caption' => 'Statusliste URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'StatusListButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $StatusListURL;'
                         ]
                     ]
                 ],
@@ -334,6 +418,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'MaintenanceModeURL',
                             'caption' => 'Wartungsmodus URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'MaintenanceModeButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $MaintenanceModeURL;'
                         ]
                     ]
                 ],
@@ -345,6 +435,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'WarningIndicatorURL',
                             'caption' => 'Warnmelder URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'WarningIndicatorButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $WarningIndicatorURL;'
                         ]
                     ]
                 ],
@@ -356,6 +452,12 @@ trait AAK_ConfigurationForm
                             'name'    => 'CentralStatusURL',
                             'caption' => 'Zentralenstatus URL',
                             'width'   => '600px'
+                        ],
+                        [
+                            'type'    => 'Button',
+                            'name'    => 'CentralStatusButton',
+                            'caption' => 'GitHub',
+                            'onClick' => 'echo $CentralStatusURL;'
                         ]
                     ]
                 ]
